@@ -1,0 +1,34 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+---
+<footer>
+  <Logo class="footer-logo" />
+  <span>© 2026 {site.name}</span>
+  <span aria-hidden="true">·</span>
+  <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 36px 24px calc(36px + env(safe-area-inset-bottom, 0px));
+    font-size: 13px;
+    color: var(--mute);
+  }
+
+  footer :global(.footer-logo) {
+    width: 18px;
+    height: 18px;
+    color: var(--p1);
+  }
+
+  footer a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

@@ -1,0 +1,480 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import LangSwitch from '../components/LangSwitch.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title={`Installation & Deployment · ${site.name}`}
+  description="Instructions to deploy Zenith Self-hosted via Docker or by cloning the Git repository."
+  initialLang="en"
+>
+  <!-- Barra de navegación contextual con selector de idioma -->
+  <header class="top-bar">
+    <div class="wrap bar-in">
+      <a class="brand" href="/" aria-label="Back to home">
+        <Logo class="nav-mark" />
+        <span>{site.name.toUpperCase()}</span>
+      </a>
+      <div class="nav-actions">
+        <LangSwitch />
+        <a class="back-link" href="/">
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M15 10H5m0 0l4-4m-4 4l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span data-i18n="nav.backToHome">Back to home</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap install-page">
+    <div class="head-section">
+      <span class="badge rv" data-i18n="installPage.badge">Self-hosted · Open source</span>
+      <h1 class="title lm"><span data-i18n="installPage.title">Start on your own infrastructure.</span></h1>
+      <p class="subtitle rv" data-i18n="installPage.subtitle">
+        Choose how to deploy your Zenith instance on your local machine or VPS. Spin it up in seconds using Docker or compile from source via Git.
+      </p>
+    </div>
+
+    <!-- Opciones de instalación -->
+    <div class="options-grid">
+      <!-- Opción 1: Docker -->
+      <section class="card rv">
+        <div class="card-head">
+          <div class="icon-tag">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M13.98 11.08h-2.1V8.98h2.1v2.1zm-2.85 0h-2.1V8.98h2.1v2.1zm-2.85 0h-2.1V8.98h2.1v2.1zm8.55 0h-2.1V8.98h2.1v2.1zm-2.85-2.85h-2.1V6.13h2.1v2.1zm-2.85 0h-2.1V6.13h2.1v2.1zm5.7 0h-2.1V6.13h2.1v2.1zm5.2 3.82c-.38-.28-1.28-.4-2.15-.05-.18-.8-1.04-1.35-1.92-1.25-.13 0-.25.02-.37.05v-4.9h-8.8v2.3h-3.3v4.9c-.8.15-2.02.55-2.6 1.7-.58 1.15-.17 2.65.92 3.35 1.5.95 3.3.9 5.08.9 4.3 0 8.35-.95 10.9-3.7 1.1-.3 1.8-.8 2.24-1.4.45-.65.45-1.4.08-1.9z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="installPage.dockerTitle">Option 1: Deploy with Docker</h2>
+            <p data-i18n="installPage.dockerDesc">The fastest, isolated, and production-ready setup.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <label data-i18n="installPage.dockerStep1">1. Grab docker-compose.yml or run with Docker Run:</label>
+          <div class="code-box">
+            <pre><code>docker run -d \
+  --name zenith-dashboard \
+  -p 3000:3000 \
+  -v zenith_data:/app/data \
+  --restart unless-stopped \
+  ghcr.io/zenith/zenith:latest</code></pre>
+            <button class="copy-btn" data-copy="docker run -d --name zenith-dashboard -p 3000:3000 -v zenith_data:/app/data --restart unless-stopped ghcr.io/zenith/zenith:latest" aria-label="Copy command">
+              <span data-i18n="installPage.copy">Copiar</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="step">
+          <label data-i18n="installPage.dockerStep2">2. Alternative with Docker Compose:</label>
+          <div class="code-box">
+            <pre><code>version: '3.8'
+
+services:
+  zenith:
+    image: ghcr.io/zenith/zenith:latest
+    container_name: zenith
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./zenith_data:/app/data
+    environment:
+      - NODE_ENV=production</code></pre>
+            <button class="copy-btn" data-copy="version: '3.8'&#10;&#10;services:&#10;  zenith:&#10;    image: ghcr.io/zenith/zenith:latest&#10;    container_name: zenith&#10;    restart: unless-stopped&#10;    ports:&#10;      - &quot;3000:3000&quot;&#10;    volumes:&#10;      - ./zenith_data:/app/data&#10;    environment:&#10;      - NODE_ENV=production" aria-label="Copy Docker Compose">
+              <span data-i18n="installPage.copy">Copiar</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><span data-i18n="installPage.dockerNote">Once started, open your browser at</span> <strong>http://localhost:3000</strong>.</p>
+        </div>
+      </section>
+
+      <!-- Opción 2: Clonar Git -->
+      <section class="card rv">
+        <div class="card-head">
+          <div class="icon-tag">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M2.6 10.59L8.38 4.8a2.53 2.53 0 0 1 3.58 0l1.45 1.45-2.3 2.3a1.9 1.9 0 0 0-2.39.31c-.69.69-.79 1.73-.31 2.53L6.5 13.3A1.9 1.9 0 0 0 4 14.5a1.9 1.9 0 0 0 1.9 1.9c.75 0 1.41-.45 1.71-1.12l2.09.84a1.9 1.9 0 0 0 1.7 1.28c1.05 0 1.9-.85 1.9-1.9 0-.25-.05-.48-.13-.7l2.25-2.25a1.9 1.9 0 0 0 2.45-.33 1.9 1.9 0 0 0-.2-2.86l4.63-4.63a2.53 2.53 0 0 1 0 3.58l-5.78 5.79a2.53 2.53 0 0 1-3.58 0l-1.46-1.45 2.3-2.3a1.9 1.9 0 0 0 2.39-.31c.69-.69.79-1.73.31-2.53l1.9-1.9a1.9 1.9 0 0 0 2.5 1.2 1.9 1.9 0 0 0-1.9-1.9c-.75 0-1.41.45-1.71 1.12l-2.09-.84c-.31-.5-.86-.88-1.5-.88-1.05 0-1.9.85-1.9 1.9 0 .25.05.48.13.7l-2.25 2.25a1.9 1.9 0 0 0-2.45.33 1.9 1.9 0 0 0 .2 2.86L2.6 14.17a2.53 2.53 0 0 1 0-3.58z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="installPage.gitTitle">Option 2: Clone from GitHub</h2>
+            <p data-i18n="installPage.gitDesc">Best if you wish to audit source code or build in your environment.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <label data-i18n="installPage.gitStep1">1. Clone the repository:</label>
+          <div class="code-box">
+            <pre><code>git clone https://github.com/alemanantonio/Zenith-Web.git
+cd Zenith-Web</code></pre>
+            <button class="copy-btn" data-copy="git clone https://github.com/alemanantonio/Zenith-Web.git&#10;cd Zenith-Web" aria-label="Copy Git commands">
+              <span data-i18n="installPage.copy">Copiar</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="step">
+          <label data-i18n="installPage.gitStep2">2. Install dependencies and build:</label>
+          <div class="code-box">
+            <pre><code>            # Install packages
+npm install
+
+            # Start development server
+npm run dev
+
+            # Or build for a static server
+npm run build</code></pre>
+            <button class="copy-btn" data-copy="npm install&#10;npm run dev" aria-label="Copy npm commands">
+              <span data-i18n="installPage.copy">Copiar</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p data-i18n="installPage.gitNote">Requires <strong>Node.js 18+</strong> and npm installed on your machine.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Espacio reservado para documentación futura -->
+    <section class="docs-placeholder rv">
+      <div class="docs-inner">
+        <div class="docs-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM8 7h8m-8 4h5" />
+          </svg>
+        </div>
+        <div class="docs-text">
+          <span class="tagline" data-i18n="installPage.docsTag">Guides & Reference</span>
+          <h3 data-i18n="installPage.docsTitle">Official Documentation</h3>
+          <p data-i18n="installPage.docsDesc">
+            Full technical docs, environment variable configs, and integration tutorials are currently being prepared.
+          </p>
+        </div>
+        <div class="docs-status">
+          <span class="status-pill" data-i18n="installPage.docsBadge">Coming Soon</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bar-in {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.28em;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  :global(.nav-mark) {
+    width: 22px;
+    height: 22px;
+    color: var(--p3);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--mute);
+    transition: color 0.3s;
+  }
+
+  .back-link:hover {
+    color: var(--ink);
+  }
+
+  .back-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .install-page {
+    padding-top: clamp(48px, 8vw, 84px);
+    padding-bottom: clamp(60px, 10vw, 120px);
+  }
+
+  .head-section {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto clamp(40px, 6vw, 70px);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    background: var(--p3);
+    border: 1px solid var(--p1);
+    box-shadow: 0 8px 24px -6px rgba(139, 86, 165, 0.45);
+    margin-bottom: 22px;
+  }
+
+  .title {
+    margin: 0 0 20px;
+    font-size: clamp(34px, 5.2vw, 56px);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .subtitle {
+    margin: 0 auto;
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+    color: var(--mute);
+    max-width: 58ch;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: clamp(24px, 3.5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .icon-tag {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--soft) 50%, transparent);
+    color: var(--p3);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .icon-tag svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-head h2 {
+    margin: 0 0 6px;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .card-head p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--mute);
+    line-height: 1.4;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step label {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .code-box {
+    position: relative;
+    border-radius: 16px;
+    background: #1c1423;
+    border: 1px solid #35273f;
+    overflow: hidden;
+  }
+
+  .code-box pre {
+    margin: 0;
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #f8f4fa;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #8b56a5;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease), background 0.2s;
+  }
+
+  .copy-btn:hover {
+    background: #a276b8;
+    transform: translateY(-1px);
+  }
+
+  .copy-btn:active {
+    transform: translateY(0);
+  }
+
+  .callout {
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--soft) 35%, transparent);
+    border: 1px solid color-mix(in srgb, var(--p1) 40%, var(--line));
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .callout p {
+    margin: 0;
+  }
+
+  .callout strong {
+    color: var(--p3);
+    font-weight: 500;
+  }
+
+  /* Placeholder de documentación */
+  .docs-placeholder {
+    margin-top: 24px;
+    border-radius: 24px;
+    background: var(--card);
+    border: 1px dashed var(--line);
+    padding: clamp(24px, 4vw, 36px);
+  }
+
+  .docs-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .docs-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--soft) 40%, transparent);
+    color: var(--p3);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .docs-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .docs-text {
+    flex: 1;
+  }
+
+  .docs-text .tagline {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--p3);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .docs-text h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .docs-text p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--mute);
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    background: color-mix(in srgb, var(--soft) 50%, transparent);
+    color: var(--p3);
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 860px) {
+    .options-grid {
+      grid-template-columns: 1fr;
+    }
+    .docs-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+---
+<div class="lang-switch" role="group" aria-label="Cambiar idioma / Select language">
+  <button
+    type="button"
+    class="lang-btn active"
+    data-target-lang="es"
+    aria-pressed="true"
+    aria-label="Español"
+  >
+    <span>ES</span>
+  </button>
+  <span class="lang-divider" aria-hidden="true">/</span>
+  <button
+    type="button"
+    class="lang-btn"
+    data-target-lang="en"
+    aria-pressed="false"
+    aria-label="English"
+  >
+    <span>EN</span>
+  </button>
+</div>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--card) 60%, transparent);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px -2px rgba(139, 86, 165, 0.08);
+  }
+
+  .lang-btn {
+    all: unset;
+    cursor: pointer;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--mute);
+    padding: 3px 6px;
+    border-radius: 6px;
+    transition: color 0.25s var(--ease), background 0.25s var(--ease);
+  }
+
+  .lang-btn:hover {
+    color: var(--ink);
+  }
+
+  .lang-btn.active {
+    color: var(--p3);
+    background: color-mix(in srgb, var(--soft) 50%, transparent);
+    font-weight: 600;
+  }
+
+  .lang-divider {
+    font-size: 11px;
+    color: var(--line);
+    user-select: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .lang-btn.active {
+      color: #f8f4fa;
+      background: color-mix(in srgb, var(--p1) 30%, transparent);
+    }
+  }
+</style>

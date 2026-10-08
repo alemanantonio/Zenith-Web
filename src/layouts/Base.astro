@@ -1,0 +1,59 @@
+---
+import '@fontsource-variable/jost';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/motion.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  initialLang?: 'es' | 'en';
+}
+
+const { title = 'Zenith', description, initialLang } = Astro.props;
+---
+<!doctype html>
+<html lang={initialLang || 'es'} data-initial-lang={initialLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <!-- Sprite del logo y gradiente del dashboard: una sola vez por página -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="zl" viewBox="-10 -10 1020 1020">
+          <g fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" />
+            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" transform="rotate(90 500 500)" />
+            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" transform="rotate(180 500 500)" />
+            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" transform="rotate(270 500 500)" />
+          </g>
+        </symbol>
+        <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#a276b8" stop-opacity=".35" />
+          <stop offset="1" stop-color="#a276b8" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <slot />
+
+    <script>
+      import { initReveal } from '../scripts/reveal';
+      import { initScroll } from '../scripts/scroll';
+      import { initPointer } from '../scripts/pointer';
+      import { initFaq } from '../scripts/faq';
+      import { initLanguage } from '../scripts/lang';
+
+      initReveal();
+      initScroll();
+      initPointer();
+      initFaq();
+      initLanguage();
+    </script>
+  </body>
+</html>
