@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Veil from '../components/Veil.astro';
+import Footer from '../components/Footer.astro';
+import Cta from '../components/Cta.astro';
+import Illustration from '../components/Illustration.astro';
+import OssCard from '../components/OssCard.astro';
+import L from '../components/L.astro';
+import { specialties, type Specialty } from '../data/specialties';
+
+export function getStaticPaths() {
+  return specialties.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props as { s: Specialty };
+const others = specialties.filter((o) => o.slug !== s.slug);
+const arrow = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const title = { es: `${s.es.name} · Zenith`, en: `${s.en.name} · Zenith` };
+const description = { es: s.es.description, en: s.en.description };
+const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+---
+<Base title={title} description={description}>
+  <Nav variant="sub" />
+  <Veil />
+
+  <header class="hero sub">
+    <div class="orb o1"></div><div class="orb o2"></div>
+    <div class="ring"></div><div class="ring" style="animation-delay:2.5s"></div>
+    <div class="glow"></div>
+    <div class="stage">
+      <svg class="smark" aria-hidden="true" viewBox="0 0 1000 1000"><image href="/favicon.svg" width="100%" height="100%"/></svg>
+      <p class="kicker"><L es="Especialidad" en="Specialty" /></p>
+      <h1 class="word sub" aria-label={s.es.name}>
+        <span class="words l es" lang="es">{s.es.name.split(' ').map((w, i) => <span style={`--i:${i}`}>{w}</span>)}</span>
+        <span class="words l en" lang="en">{s.en.name.split(' ').map((w, i) => <span style={`--i:${i}`}>{w}</span>)}</span>
+      </h1>
+      <p class="tag"><L es={s.es.tag} en={s.en.tag} /></p>
+    </div>
+    <div class="cue"></div>
+  </header>
+
+  <section class="statement">
+    <p>
+      <span class="l es" lang="es" set:html={words(s.es.stmt)} />
+      <span class="l en" lang="en" set:html={words(s.en.stmt)} />
+    </p>
+  </section>
+
+  <section class="bigsec"><div class="wrap">
+    <div class="bigart rv"><Illustration type={s.art} /></div>
+    <p class="note"><L es="Ejemplo ilustrativo." en="Illustrative example." /></p>
+  </div></section>
+
+  <section class="principles"><div class="wrap">
+    <h2 class="lm"><span><L es="Lo esencial." en="The essentials." /></span></h2>
+    <div class="pgrid">
+      {s.es.pr.map((p, i) => (
+        <div class="pr rv"><h3><L es={p.t} en={s.en.pr[i].t} /></h3><p><L es={p.d} en={s.en.pr[i].d} /></p></div>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="principles" id="precio"><div class="wrap">
+    <h2 class="lm"><span><L es="Precio y soporte." en="Price and support." /></span></h2>
+    <div class="pgrid">
+      <div class="pr rv"><h3><L es="Precio" en="Price" /></h3><p><L es={s.es.price} en={s.en.price} /></p></div>
+      <div class="pr rv"><h3><L es="Plazo" en="Timeline" /></h3><p><L es="El plazo depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo." en="The timeline depends on the size of the project, but you always receive progress updates during development." /></p></div>
+      <div class="pr rv"><h3><L es="Soporte" en="Support" /></h3><p><L es={s.es.support} en={s.en.support} /></p></div>
+    </div>
+    {s.oss ? (
+      <div class="oss-grid rv">
+        <OssCard name={s.oss.split('/').pop()!} url={s.oss} />
+      </div>
+    ) : (
+      <p class="note oss-note rv"><L es="Las páginas web no tienen sistema open source: se construyen a la medida del cliente y se mantienen como sistema de pago." en="Websites have no open source system: they are custom-built to the client and kept as a paid system." /></p>
+    )}
+  </div></section>
+
+  <section class="others"><div class="wrap">
+    <h2 class="lm"><span><L es="Otras especialidades." en="Other specialties." /></span></h2>
+    <div class="mgrid">
+      {others.map((o) => (
+        <a class="mini rv" href={`/${o.slug}`}><span><L es={o.es.name} en={o.en.name} /></span><Fragment set:html={arrow} /></a>
+      ))}
+    </div>
+  </div></section>
+
+  <Cta heading={{ es: s.es.cta, en: s.en.cta }} />
+
+  <Footer />
+</Base>

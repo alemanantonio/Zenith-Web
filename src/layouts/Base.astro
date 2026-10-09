@@ -1,59 +1,183 @@
 ---
 import '@fontsource-variable/jost';
-import '../styles/tokens.css';
-import '../styles/base.css';
-import '../styles/motion.css';
+import '../styles/global.css';
 
 interface Props {
-  title?: string;
-  description?: string;
-  initialLang?: 'es' | 'en';
+  title: { es: string; en: string };
+  description: { es: string; en: string };
 }
-
-const { title = 'Zenith', description, initialLang } = Astro.props;
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
-<!doctype html>
-<html lang={initialLang || 'es'} data-initial-lang={initialLang}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    <!-- Sprite del logo y gradiente del dashboard: una sola vez por página -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <defs>
-        <symbol id="zl" viewBox="-10 -10 1020 1020">
-          <g fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
-            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" />
-            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" transform="rotate(90 500 500)" />
-            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" transform="rotate(180 500 500)" />
-            <path d="M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z" transform="rotate(270 500 500)" />
-          </g>
-        </symbol>
-        <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#a276b8" stop-opacity=".35" />
-          <stop offset="1" stop-color="#a276b8" stop-opacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-es={title.es} data-en={title.en}>{title.es}</title>
+<meta name="description" content={description.es} data-es={description.es} data-en={description.en}>
+<meta name="theme-color" content="#8b56a5">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Zenith">
+<meta property="og:title" content={title.es} data-es={title.es} data-en={title.en}>
+<meta property="og:description" content={description.es} data-es={description.es} data-en={description.en}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={new URL('/og.png', Astro.site)}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content={new URL('/og.png', Astro.site)}>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script is:inline>
+try{
+  var l=localStorage.getItem('zenith-lang');
+  if(l!=='es'&&l!=='en'){
+    l=(navigator.language||'').toLowerCase().indexOf('es')===0?'es':'en';
+  }
+  document.documentElement.setAttribute('data-lang',l);
+  document.documentElement.setAttribute('lang',l);
+}catch(e){}
+</script>
+<script is:inline>
+try{
+  if(sessionStorage.getItem('zenith-veil')==='1'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.documentElement.setAttribute('data-veil','1');
+  }
+  sessionStorage.removeItem('zenith-veil');
+}catch(e){}
+</script>
+</head>
+<body>
 
-    <slot />
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a276b8" stop-opacity=".35"/><stop offset="1" stop-color="#a276b8" stop-opacity="0"/></linearGradient>
+</defs></svg>
 
-    <script>
-      import { initReveal } from '../scripts/reveal';
-      import { initScroll } from '../scripts/scroll';
-      import { initPointer } from '../scripts/pointer';
-      import { initFaq } from '../scripts/faq';
-      import { initLanguage } from '../scripts/lang';
+<slot />
 
-      initReveal();
-      initScroll();
-      initPointer();
-      initFaq();
-      initLanguage();
-    </script>
-  </body>
+<script>
+// @ts-nocheck
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,vh=innerHeight,busy=false;
+var $=function(s,c){return(c||document).querySelector(s)},$$=function(s,c){return[].slice.call((c||document).querySelectorAll(s))};
+var nav=$('#nav'),veil=$('#veil'),bar=$('.bar'),par=$('#par'),stage=$('.hero .stage');
+if(nav)setTimeout(function(){nav.classList.add('on')},50);
+var burger=$('.burger');
+if(nav&&burger){
+  var closeMenu=function(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false')};
+  burger.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+  });
+  $$('.links a',nav).forEach(function(a){a.addEventListener('click',closeMenu)});
+  addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+}
+if(document.documentElement.hasAttribute('data-veil')&&veil){
+  veil.animate([{opacity:1},{opacity:0}],{duration:650,delay:150,fill:'forwards'}).finished.then(function(){
+    veil.getAnimations().forEach(function(x){x.cancel()});
+    document.documentElement.removeAttribute('data-veil');
+  });
+}
+var stm=$$('.statement p').map(function(p){return{p:p,w:[]}});
+function refreshStm(){
+  stm.forEach(function(o){
+    var vis=null;
+    $$('.l',o.p).forEach(function(el){if(el.offsetParent)vis=el});
+    o.w=vis?$$('.w',vis):[];
+  });
+}
+refreshStm();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.2});
+$$('.rv,.lm,.pr').forEach(function(el){io.observe(el)});
+var pt={x:innerWidth/2,y:innerHeight/2},bigs=$$('.bigart .ui');
+function onScroll(){
+  var y=scrollY;vh=innerHeight;var sp=y/Math.max(1,document.documentElement.scrollHeight-vh);
+  if(bar)bar.style.setProperty('--sp',sp);
+  stm.forEach(function(o){if(!o.p.offsetParent||!o.w.length)return;
+    if(reduce){o.w.forEach(function(s){s.classList.add('lit')});return}
+    var a=o.p.getBoundingClientRect(),n=Math.floor(Math.max(0,Math.min(1,(vh*.8-a.top)/(a.height+vh*.35)))*o.w.length*1.15);
+    o.w.forEach(function(s,i){s.classList.toggle('lit',i<n)})});
+  bigs.forEach(function(u){var r=u.parentNode.getBoundingClientRect();u.style.setProperty('--t',reduce?1:Math.max(0,Math.min(1,(vh-r.top)/(vh*.85))))});
+  if(reduce)return;
+  if(y<vh*1.2){var p=y/vh,e=par||stage;if(e){e.style.transform='translateY('+(y*.25)+'px) scale('+(1-p*.25)+')';e.style.opacity=Math.max(0,1-p*1.1)}}
+}
+addEventListener('scroll',function(){requestAnimationFrame(onScroll)},{passive:true});
+addEventListener('pointerdown',function(e){pt={x:e.clientX,y:e.clientY}},true);
+function veilTo(x,y,after){
+  if(reduce||!veil){after();busy=false;return}
+  var R=Math.hypot(innerWidth,innerHeight)*1.1,mk=$('svg',veil);
+  var an=veil.animate([{clipPath:'circle(0px at '+x+'px '+y+'px)'},{clipPath:'circle('+R+'px at '+x+'px '+y+'px)'}],{duration:750,easing:'cubic-bezier(.7,0,.2,1)',fill:'forwards'});
+  mk.animate([{opacity:0,transform:'scale(.4) rotate(-90deg)'},{opacity:1,transform:'none'}],{duration:600,delay:250,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'});
+  an.finished.then(function(){
+    after();
+    return veil.animate([{opacity:1},{opacity:0}],{duration:650,delay:150,fill:'forwards'}).finished;
+  }).then(function(){
+    veil.getAnimations().concat(mk.getAnimations()).forEach(function(x){x.cancel()});
+    busy=false;
+  });
+}
+document.addEventListener('click',function(e){
+  if(busy){e.preventDefault();return}
+  var a=e.target.closest&&e.target.closest('a[href]');
+  if(!a||a.host!==location.host||a.target==='_blank'||a.hasAttribute('download'))return;
+  if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  var href=a.getAttribute('href');
+  if(!href||href.charAt(0)==='#'||href.indexOf('mailto:')===0||href.indexOf('tel:')===0)return;
+  var url;try{url=new URL(a.href,location.href)}catch(_){return}
+  if(url.origin!==location.origin)return;
+  if(url.pathname===location.pathname&&url.search===location.search)return;
+  if(reduce||!veil)return;
+  e.preventDefault();busy=true;
+  var R=Math.hypot(innerWidth,innerHeight)*1.1,mk=$('svg',veil);
+  var an=veil.animate([{clipPath:'circle(0px at '+pt.x+'px '+pt.y+'px)'},{clipPath:'circle('+R+'px at '+pt.x+'px '+pt.y+'px)'}],{duration:750,easing:'cubic-bezier(.7,0,.2,1)',fill:'forwards'});
+  mk.animate([{opacity:0,transform:'scale(.4) rotate(-90deg)'},{opacity:1,transform:'none'}],{duration:600,delay:250,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'});
+  an.finished.then(function(){
+    try{sessionStorage.setItem('zenith-veil','1')}catch(_){}
+    location.href=url.href;
+  });
+});
+addEventListener('pageshow',function(e){
+  if(!e.persisted||!veil)return;
+  veil.getAnimations().forEach(function(x){x.cancel()});
+  document.documentElement.removeAttribute('data-veil');busy=false;
+});
+function applyLang(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.documentElement.setAttribute('lang',l);
+  try{localStorage.setItem('zenith-lang',l)}catch(e){}
+  var el=$('title'),md=$('meta[name="description"]'),ot=$('meta[property="og:title"]'),od=$('meta[property="og:description"]');
+  if(el&&(l==='en'?el.dataset.en:el.dataset.es))document.title=l==='en'?el.dataset.en:el.dataset.es;
+  [md,ot,od].forEach(function(m){
+    if(!m)return;var v=l==='en'?m.dataset.en:m.dataset.es;if(v)m.setAttribute('content',v);
+  });
+  $$('.lang [data-setlang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setlang===l?'true':'false')});
+  refreshStm();onScroll();
+}
+$$('.lang [data-setlang]').forEach(function(b){b.addEventListener('click',function(){
+  if(busy)return;
+  var l=b.dataset.setlang;
+  if(l===document.documentElement.getAttribute('data-lang'))return;
+  busy=true;
+  var r=b.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+  veilTo(x,y,function(){applyLang(l)});
+})});
+$$('.lang [data-setlang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setlang===document.documentElement.getAttribute('data-lang')?'true':'false')});
+$$('.qa button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentNode,o=q.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
+onScroll();
+if(reduce)return;
+$$('.hero').forEach(function(h){h.addEventListener('pointermove',function(e){var r=h.getBoundingClientRect();h.style.setProperty('--mx',(e.clientX-r.left)+'px');h.style.setProperty('--my',(e.clientY-r.top)+'px')})});
+$$('.ex').forEach(function(c){
+  c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    c.style.setProperty('--ry',((x-.5)*8)+'deg');c.style.setProperty('--rx',((.5-y)*8)+'deg');c.style.setProperty('--gx',(x*100)+'%');c.style.setProperty('--gy',(y*100)+'%')});
+  c.addEventListener('pointerleave',function(){c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')});
+});
+$$('.mag').forEach(function(m){var b=$('.btn',m);
+  m.addEventListener('pointermove',function(e){var r=m.getBoundingClientRect();b.style.setProperty('--bx',((e.clientX-r.left-r.width/2)*.22)+'px');b.style.setProperty('--by',((e.clientY-r.top-r.height/2)*.3)+'px')});
+  m.addEventListener('pointerleave',function(){b.style.setProperty('--bx','0px');b.style.setProperty('--by','0px')})});
+})();
+</script>
+</body>
 </html>

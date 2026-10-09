@@ -1,0 +1,18 @@
+---
+interface Props {
+  type: 'web' | 'dash' | 'inv' | 'saas';
+}
+const { type } = Astro.props;
+---
+{type === 'web' && (
+  <div class="ui web"><div class="bar3"><i></i><i></i><i></i></div><div class="wbody"><div class="wh"><b style="--w:92%;--k:0"></b><b style="--w:60%;--k:1"></b><span class="wbtn"></span></div><div class="wimg"></div></div><svg class="cur" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 2l12 7-5 1.5L8.5 16z" fill="#2e2237" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
+)}
+{type === 'dash' && (
+  <div class="ui dash"><div class="dgrid"><div class="d1"><svg viewBox="0 0 300 100" width="100%" height="64" preserveAspectRatio="none"><path class="area" d="M0 80C40 70 60 30 100 40S170 80 210 45 270 20 300 28V100H0Z"/><path class="line" pathLength="1" d="M0 80C40 70 60 30 100 40S170 80 210 45 270 20 300 28"/><path class="line b" pathLength="1" d="M0 90C50 85 80 70 120 72S200 60 240 62 280 50 300 52"/></svg></div><div class="d2"><svg viewBox="0 0 80 80" width="58" height="58"><circle class="arc" cx="40" cy="40" r="30"/><circle class="arc v" pathLength="1" cx="40" cy="40" r="30" transform="rotate(-90 40 40)"/></svg></div><div class="d3"><div class="bars"><b style="--h:45%;--k:0"></b><b style="--h:70%;--k:1"></b><b style="--h:55%;--k:2"></b><b style="--h:90%;--k:3"></b><b style="--h:62%;--k:4"></b></div></div></div></div>
+)}
+{type === 'inv' && (
+  <div class="ui inv"><div class="scan"></div><div class="irow" style="--f:0.82;--k:0"><i class="bx"></i><span class="sk"></span><span class="tr"><em></em></span></div><div class="irow" style="--f:0.6;--k:1"><i class="bx"></i><span class="sk"></span><span class="tr"><em></em></span></div><div class="irow low" style="--f:0.26;--k:2"><i class="bx"></i><span class="sk"></span><span class="tr"><em></em></span></div><div class="irow" style="--f:0.9;--k:3"><i class="bx"></i><span class="sk"></span><span class="tr"><em></em></span></div></div>
+)}
+{type === 'saas' && (
+  <div class="ui saas"><div class="sh"><div class="avs"><span class="av" style="--k:0"></span><span class="av" style="--k:1"></span><span class="av" style="--k:2"></span><span class="av" style="--k:3"></span></div><span class="tg"><i></i></span></div><div class="steps"><b style="--h:28%;--k:0"></b><b style="--h:42%;--k:1"></b><b style="--h:55%;--k:2"></b><b style="--h:74%;--k:3"></b><b style="--h:100%;--k:4"></b></div></div>
+)}

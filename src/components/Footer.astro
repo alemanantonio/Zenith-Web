@@ -1,34 +1,15 @@
 ---
-import Logo from './Logo.astro';
-import { site } from '../data/site';
+import { GITHUB, GITHUB_USER, SITE_OWNER } from '../data/specialties';
+import L from './L.astro';
 ---
 <footer>
-  <Logo class="footer-logo" />
-  <span>© 2026 {site.name}</span>
-  <span aria-hidden="true">·</span>
-  <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+  <svg aria-hidden="true"><image href="/favicon.svg" width="100%" height="100%"/></svg>© 2026 Zenith
+  <span class="fsep" aria-hidden="true">·</span>
+  <L es="Atención 7:00–17:00 (CDMX)" en="Available 7:00 AM–5:00 PM (Mexico City)" />
+  <span class="fsep" aria-hidden="true">·</span>
+  <a href={GITHUB} rel="noopener">GitHub @{GITHUB_USER}</a>
+  <span class="fsep" aria-hidden="true">·</span>
+  <a href={SITE_OWNER} rel="noopener">antonioaleman.dev</a>
+  <span class="fsep" aria-hidden="true">·</span>
+  <a href="/privacidad"><L es="Privacidad y aviso legal" en="Privacy and legal notice" /></a>
 </footer>
-
-<style>
-  footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 36px 24px calc(36px + env(safe-area-inset-bottom, 0px));
-    font-size: 13px;
-    color: var(--mute);
-  }
-
-  footer :global(.footer-logo) {
-    width: 18px;
-    height: 18px;
-    color: var(--p1);
-  }
-
-  footer a {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-</style>

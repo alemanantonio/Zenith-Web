@@ -1,24 +1,101 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Statement from '../components/Statement.astro';
-import DashboardMock from '../components/DashboardMock.astro';
-import Principles from '../components/Principles.astro';
-import Plans from '../components/Plans.astro';
-import Faq from '../components/Faq.astro';
-import Cta from '../components/Cta.astro';
+import Veil from '../components/Veil.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import Cta from '../components/Cta.astro';
+import Illustration from '../components/Illustration.astro';
+import L from '../components/L.astro';
+import { specialties } from '../data/specialties';
+
+const title = { es: 'Zenith · Software full stack, sin tocar código', en: 'Zenith · Full stack software, no code required' };
+const description = {
+  es: 'Zenith es un equipo de desarrollo full stack: construimos páginas web, dashboards, sistemas de inventarios y SaaS para que tú no tengas que tocar código.',
+  en: 'Zenith is a full stack development team: we build websites, dashboards, inventory systems and SaaS so you never have to touch code.',
+};
+const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+const statementEs = 'Un equipo full stack que construye tu software, para que tú no tengas que tocar código.';
+const statementEn = 'A full stack team that builds your software, so you never have to touch code.';
+const faq = [
+  { q: { es: '¿Qué es Zenith?', en: 'What is Zenith?' }, a: { es: 'Un equipo de desarrollo full stack. Construimos software para que tú no tengas que tocar código, y ofrecemos open source para quien sí sabe programar.', en: 'A full stack development team. We build software so you do not have to touch code, and we offer open source for those who do program.' } },
+  { q: { es: '¿Qué software construyen?', en: 'What software do you build?' }, a: { es: 'Por ejemplo, páginas web, dashboards personales, sistemas de inventarios y SaaS, entre otros.', en: 'For example, websites, personal dashboards, inventory systems and SaaS, among others.' } },
+  { q: { es: '¿Cuánto cuesta?', en: 'How much does it cost?' }, a: { es: 'El precio depende del tamaño del proyecto. Cada especialidad explica su precio y su soporte; escríbenos y te enviamos una propuesta.', en: 'The price depends on the size of the project. Each specialty explains its pricing and support; write to us and we will send you a proposal.' } },
+  { q: { es: '¿Cuánto tarda?', en: 'How long does it take?' }, a: { es: 'El plazo de entrega depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo.', en: 'The delivery time depends on the size of the project, but you always receive progress updates during development.' } },
+  { q: { es: '¿Qué incluye el soporte?', en: 'What does support include?' }, a: { es: 'El soporte se renueva anualmente. Las páginas web incluyen mantenimiento y hosting; dashboards, inventarios y SaaS incluyen alojamiento más premium y siempre están alojados por nuestra parte.', en: 'Support renews annually. Websites include maintenance and hosting; dashboards, inventory systems and SaaS include more premium hosting and are always hosted by us.' } },
+  { q: { es: '¿Necesito saber programar?', en: 'Do I need to know how to program?' }, a: { es: 'No. Nuestro equipo se encarga del código para que tú no tengas que tocarlo. Si sí programas, ofrecemos open source que puedes instalar y alojar por tu cuenta.', en: 'No. Our team handles the code so you do not have to touch it. If you do program, we offer open source you can install and host yourself.' } },
+  { q: { es: '¿Puedo revisar el código?', en: 'Can I review the code?' }, a: { es: 'Sí, para quien programa ofrecemos open source en dashboards, inventarios y SaaS. Las páginas web se mantienen como sistema de pago.', en: 'Yes, for those who program we offer open source for dashboards, inventory systems and SaaS. Websites are kept as a paid system.' } },
+];
+const steps = [
+  { n: '01', t: { es: 'Contacto', en: 'Contact' }, d: { es: 'Escríbenos y cuéntanos qué necesitas; te atendemos de 7:00 a 17:00, hora de la Ciudad de México.', en: 'Write to us and tell us what you need; we are available from 7:00 AM to 5:00 PM, Mexico City time.' } },
+  { n: '02', t: { es: 'Propuesta', en: 'Proposal' }, d: { es: 'Te enviamos una propuesta con alcance y precio; este depende del tamaño del proyecto.', en: 'We send you a proposal with scope and price; the price depends on the size of the project.' } },
+  { n: '03', t: { es: 'Desarrollo', en: 'Development' }, d: { es: 'Construimos tu software y siempre te entregamos avances durante todo el proceso.', en: 'We build your software and you always receive progress updates throughout the process.' } },
+  { n: '04', t: { es: 'Entrega', en: 'Delivery' }, d: { es: 'Entregamos el proyecto listo para usar. El plazo depende del tamaño del proyecto.', en: 'We deliver the project ready to use. The timeline depends on the size of the project.' } },
+];
 ---
-<Base title={site.name} description={site.description}>
-  <Nav />
-  <Hero />
-  <Statement />
-  <DashboardMock />
-  <Principles />
-  <Plans />
-  <Faq />
-  <Cta />
+<Base title={title} description={description}>
+  <Nav variant="home" />
+  <Veil />
+
+  <header class="hero" id="top">
+    <div class="orb o1"></div><div class="orb o2"></div>
+    <div class="ring"></div><div class="ring" style="animation-delay:2.5s"></div>
+    <div class="glow"></div>
+    <div class="stage">
+      <div id="par"><div class="mark-wrap">
+        <svg class="mark" viewBox="-1 -1 202 202" role="img" aria-label="Zenith"><g fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><g transform="rotate(0 100 100)"><path class="petal" style="--i:0" d="M5.6 85.4A60 60 0 1 1 114.4 85.4A77 77 0 0 0 5.6 85.4Z"/></g><g transform="rotate(90 100 100)"><path class="petal" style="--i:1" d="M5.6 85.4A60 60 0 1 1 114.4 85.4A77 77 0 0 0 5.6 85.4Z"/></g><g transform="rotate(180 100 100)"><path class="petal" style="--i:2" d="M5.6 85.4A60 60 0 1 1 114.4 85.4A77 77 0 0 0 5.6 85.4Z"/></g><g transform="rotate(270 100 100)"><path class="petal" style="--i:3" d="M5.6 85.4A60 60 0 1 1 114.4 85.4A77 77 0 0 0 5.6 85.4Z"/></g></g></svg></div></div>
+      <h1 class="word" aria-label="Zenith"><span class="words"><span style="--i:0">Z</span><span style="--i:1">E</span><span style="--i:2">N</span><span style="--i:3">I</span><span style="--i:4">T</span><span style="--i:5">H</span></span></h1>
+      <p class="tag"><L es="Software full stack, sin que tengas que tocar código." en="Full stack software, without you having to touch code." /></p>
+    </div>
+    <div class="cue"></div>
+  </header>
+
+  <section class="statement" id="que-es">
+    <p>
+      <span class="l es" lang="es" set:html={words(statementEs)} />
+      <span class="l en" lang="en" set:html={words(statementEn)} />
+    </p>
+  </section>
+
+  <section class="services" id="que-hacemos"><div class="wrap">
+    <h2 class="lm"><span><L es="Lo que construimos." en="What we build." /></span></h2>
+    <p class="lead rv"><L es="Zenith es un equipo de desarrollo full stack. Nos encargamos del código para que tú solo tengas que usarlo. Entra a cada ejemplo para conocer la especialidad." en="Zenith is a full stack development team. We handle the code so you only have to use it. Open each example to learn about the specialty." /></p>
+    <div class="exgrid">
+      {specialties.map((s) => (
+        <div class="exw rv"><a class="ex" href={`/${s.slug}`} aria-label={s.es.name}>
+          <div class="art"><Illustration type={s.art} /></div>
+          <div class="meta"><div><h3><L es={s.es.name} en={s.en.name} /></h3><p><L es={s.es.tag} en={s.en.tag} /></p></div><span class="go"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        </a></div>
+      ))}
+    </div>
+    <p class="note"><L es="Ejemplos ilustrativos." en="Illustrative examples." /></p>
+  </div></section>
+
+  <section class="principles" id="principios"><div class="wrap">
+    <h2 class="lm"><span><L es="Para quien programa y para quien no." en="For those who code and those who don't." /></span></h2>
+    <div class="pgrid">
+      <div class="pr rv"><h3>Full stack</h3><p><L es="Del diseño de la interfaz a la lógica y los datos que la sostienen." en="From interface design to the logic and data behind it." /></p></div>
+      <div class="pr rv"><h3><L es="Código abierto" en="Open source" /></h3><p><L es="Si sabes programar, puedes instalarlo, revisarlo y alojarlo por tu cuenta." en="If you can program, you can install it, review it and host it yourself." /></p></div>
+      <div class="pr rv"><h3><L es="Sin tocar código" en="No code required" /></h3><p><L es="Si no programas, no tienes que hacerlo: nuestro equipo se encarga." en="If you do not program, you do not have to: our team handles it." /></p></div>
+    </div>
+  </div></section>
+
+  <section class="principles" id="proceso"><div class="wrap">
+    <h2 class="lm"><span><L es="Cómo trabajamos." en="How we work." /></span></h2>
+    <div class="pgrid proc">
+      {steps.map((s) => (
+        <div class="pr rv"><span class="num">{s.n}</span><h3><L es={s.t.es} en={s.t.en} /></h3><p><L es={s.d.es} en={s.d.en} /></p></div>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="faq" id="preguntas"><div class="wrap">
+    <h2 class="lm"><span><L es="Preguntas frecuentes." en="Frequently asked questions." /></span></h2>
+    {faq.map((f) => (
+      <div class="qa rv"><button aria-expanded="false"><L es={f.q.es} en={f.q.en} /><i></i></button><div class="ans"><div><p><L es={f.a.es} en={f.a.en} /></p></div></div></div>
+    ))}
+  </div></section>
+
+  <Cta heading={{ es: 'Hablemos de tu proyecto.', en: "Let's talk about your project." }} />
+
   <Footer />
 </Base>

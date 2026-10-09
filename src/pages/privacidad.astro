@@ -1,0 +1,79 @@
+---
+import '@fontsource-variable/jost';
+---
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacidad y aviso legal · Zenith</title>
+<meta name="description" content="Aviso legal y política de privacidad del sitio de Zenith.">
+<meta name="theme-color" content="#8b56a5">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script is:inline>
+try{
+  var l=localStorage.getItem('zenith-lang');
+  if(l!=='es'&&l!=='en'){
+    l=(navigator.language||'').toLowerCase().indexOf('es')===0?'es':'en';
+  }
+  document.documentElement.setAttribute('data-lang',l);
+  document.documentElement.setAttribute('lang',l);
+}catch(e){}
+</script>
+<style is:global>
+:root{
+  --p1:#a276b8; --p3:#8b56a5; --soft:#e2d1ea; --mist:#f8f4fa;
+  --bg:#f8f4fa; --ink:#2e2237; --mute:#7d6b88; --line:#e2d1ea;
+  --font:'Jost Variable','Jost',ui-sans-serif,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1423;--ink:#f8f4fa;--mute:#b998c9;--line:#35273f}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--p3);outline-offset:4px;border-radius:6px}
+.l.en{display:none}
+html[data-lang="en"] .l.es{display:none}
+html[data-lang="en"] .l.en{display:revert}
+.wrap{max-width:720px;margin:0 auto;padding:64px 24px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;letter-spacing:.28em;font-size:14px;margin-bottom:56px}
+.brand svg{width:22px;height:22px}
+h1{margin:0 0 48px;font-weight:200;font-size:clamp(32px,5vw,48px);letter-spacing:-.02em;line-height:1.1}
+h2{margin:48px 0 16px;font-size:clamp(22px,2.4vw,28px);font-weight:300;line-height:1.2}
+p{margin:0 0 16px;font-size:17px;color:var(--mute);max-width:62ch}
+ul{margin:0 0 16px;padding-left:22px;color:var(--mute);font-size:17px;max-width:62ch}
+li{margin-bottom:8px}
+a.mail{color:var(--p3);text-decoration:underline;text-underline-offset:3px}
+footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:80px;padding:36px 24px calc(36px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--mute);border-top:1px solid var(--line)}
+footer svg{width:18px;height:18px;color:var(--p1)}
+footer a{color:var(--mute);transition:color .3s}footer a:hover{color:var(--ink);text-decoration:underline}
+.fsep{opacity:.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="/" aria-label="Zenith, ir al inicio"><svg aria-hidden="true"><image href="/favicon.svg" width="100%" height="100%"/></svg>ZENITH</a>
+  <h1><span class="l es" lang="es">Privacidad y aviso legal</span><span class="l en" lang="en">Privacy and legal notice</span></h1>
+
+  <h2><span class="l es" lang="es">Aviso legal</span><span class="l en" lang="en">Legal notice</span></h2>
+  <p><span class="l es" lang="es">Este sitio web es la página de presentación de Zenith, un equipo de desarrollo full stack. Su uso es gratuito y no requiere registro. El contenido tiene fines informativos sobre los servicios ofrecidos.</span><span class="l en" lang="en">This website is the presentation page of Zenith, a full stack development team. It is free to use and requires no registration. Its content is informational about the services offered.</span></p>
+  <p><span class="l es" lang="es">Para cualquier consulta puedes escribir a </span><span class="l en" lang="en">For any questions you can write to </span><a class="mail" href="mailto:zenith@antonioaleman.dev">zenith@antonioaleman.dev</a><span class="l es" lang="es">.</span><span class="l en" lang="en">.</span></p>
+
+  <h2><span class="l es" lang="es">Política de privacidad</span><span class="l en" lang="en">Privacy policy</span></h2>
+  <p><span class="l es" lang="es">Este sitio no utiliza cookies, no incorpora sistemas de analítica y no recoge datos personales mediante formularios.</span><span class="l en" lang="en">This site does not use cookies, does not include analytics systems and does not collect personal data through forms.</span></p>
+  <ul>
+    <li><span class="l es" lang="es">El contacto se realiza por correo electrónico, usando tu propio cliente de correo. Los datos que decidas enviar (nombre, correo, mensaje) se usan únicamente para responderte.</span><span class="l en" lang="en">Contact is made by email, using your own mail client. The data you choose to send (name, email, message) is used solely to reply to you.</span></li>
+    <li><span class="l es" lang="es">Esos datos no se ceden a terceros ni se usan con fines comerciales.</span><span class="l en" lang="en">That data is not shared with third parties nor used for commercial purposes.</span></li>
+    <li><span class="l es" lang="es">Puedes solicitar acceso, rectificación o supresión de tus datos escribiendo a </span><span class="l en" lang="en">You can request access, correction or deletion of your data by writing to </span><a class="mail" href="mailto:zenith@antonioaleman.dev">zenith@antonioaleman.dev</a><span class="l es" lang="es">.</span><span class="l en" lang="en">.</span></li>
+  </ul>
+  <p><span class="l es" lang="es">La tipografía del sitio se aloja en el propio servidor; no se realizan peticiones a servicios externos de terceros.</span><span class="l en" lang="en">The site typography is hosted on the server itself; no requests are made to third-party external services.</span></p>
+
+  <h2><span class="l es" lang="es">Propiedad intelectual</span><span class="l en" lang="en">Intellectual property</span></h2>
+  <p><span class="l es" lang="es">Los textos, el diseño y el logotipo de este sitio pertenecen a Zenith, salvo que se indique lo contrario. Cuando el proyecto se publica como código abierto, su licencia se indica en el repositorio correspondiente.</span><span class="l en" lang="en">The texts, design and logo of this site belong to Zenith unless stated otherwise. When the project is published as open source, its license is indicated in the corresponding repository.</span></p>
+
+  <h2><span class="l es" lang="es">Actualizaciones</span><span class="l en" lang="en">Updates</span></h2>
+  <p><span class="l es" lang="es">Este aviso puede actualizarse si cambian los servicios o la forma de contacto. La fecha de la última versión es la de publicación de este sitio.</span><span class="l en" lang="en">This notice may be updated if the services or the way to contact change. The date of the latest version is the publication date of this site.</span></p>
+</div>
+<footer><svg aria-hidden="true"><image href="/favicon.svg" width="100%" height="100%"/></svg>© 2026 Zenith<span class="fsep" aria-hidden="true">·</span><a href="/"><span class="l es" lang="es">Inicio</span><span class="l en" lang="en">Home</span></a></footer>
+</body>
+</html>
