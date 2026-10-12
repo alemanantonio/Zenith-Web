@@ -31,6 +31,18 @@ const steps = [
   { n: '03', t: { es: 'Desarrollo', en: 'Development' }, d: { es: 'Construimos tu software y siempre te entregamos avances durante todo el proceso.', en: 'We build your software and you always receive progress updates throughout the process.' } },
   { n: '04', t: { es: 'Entrega', en: 'Delivery' }, d: { es: 'Entregamos el proyecto listo para usar. El plazo depende del tamaño del proyecto.', en: 'We deliver the project ready to use. The timeline depends on the size of the project.' } },
 ];
+const launchIncluded = [
+  { es: 'Diseño moderno y adaptable a móviles', en: 'Modern, mobile-responsive design' },
+  { es: 'Hasta 4–5 secciones', en: 'Up to 4–5 sections' },
+  { es: 'Información y fotografías proporcionadas por el negocio', en: 'Information and photos provided by the business' },
+  { es: 'Botones de contacto y enlaces a redes sociales', en: 'Contact buttons and social media links' },
+];
+const launchExcluded = [
+  { es: 'Tiendas en línea completas', en: 'Full online stores' },
+  { es: 'Sistemas administrativos', en: 'Administrative systems' },
+  { es: 'Reservaciones o pagos automatizados', en: 'Automated bookings or payments' },
+  { es: 'Hosting, dominio y mantenimiento recurrente, salvo que decidas incluirlos', en: 'Hosting, domain and recurring maintenance, unless you decide to include them' },
+];
 ---
 <Base title={title} description={description}>
   <Nav variant="home" />
@@ -85,6 +97,33 @@ const steps = [
       {steps.map((s) => (
         <div class="pr rv"><span class="num">{s.n}</span><h3><L es={s.t.es} en={s.t.en} /></h3><p><L es={s.d.es} en={s.d.en} /></p></div>
       ))}
+    </div>
+  </div></section>
+
+  <section class="launch" id="lanzamiento"><div class="wrap">
+    <h2 class="lm"><span><L es="Programa de Lanzamiento." en="Launch Program." /></span></h2>
+    <div class="lswrap rv">
+      <span class="lbadge"><i></i><L es="5 plazas disponibles" en="5 spots available" /></span>
+      <p class="lprice"><span class="amt">$0</span><span class="per"><L es="solo para páginas web" en="websites only" /></span></p>
+      <p class="llead"><L es="Impulsamos los primeros proyectos con una página web sin costo. Las plazas son limitadas: escríbenos para reservar la tuya." en="We kick off our first projects with a website at no cost. Spots are limited: write to us to reserve yours." /></p>
+    </div>
+    <div class="lcols">
+      <div class="lcol inc rv">
+        <h3><span class="ic"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><L es="Incluido sin costo" en="Included at no cost" /></h3>
+        <ul>
+          {launchIncluded.map((x) => (
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><L es={x.es} en={x.en} /></li>
+          ))}
+        </ul>
+      </div>
+      <div class="lcol exc rv">
+        <h3><span class="ic"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><L es="Fuera de la promoción" en="Not included in the promotion" /></h3>
+        <ul>
+          {launchExcluded.map((x) => (
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><L es={x.es} en={x.en} /></li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div></section>
 
