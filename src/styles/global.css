@@ -71,7 +71,7 @@ html[data-lang="en"] .l.en{display:revert}
 .stage{position:relative;z-index:2;padding:0 24px}
 .mark-wrap{width:clamp(120px,19vw,176px);margin:0 auto}
 .mark{display:block;width:100%;height:auto;color:#f8f4fa;animation:spin 70s linear 2.4s infinite;filter:brightness(0) invert(1) drop-shadow(0 10px 40px rgba(60,20,90,.35))}
-.petal{transform-box:view-box;transform-origin:100px 100px;opacity:0;animation:petal 1.5s var(--ease) calc(.2s + var(--i)*.14s) both}
+.petal{transform-box:view-box;transform-origin:center;opacity:0;animation:petal 1.5s var(--ease) calc(.2s + var(--i)*.14s) both}
 @keyframes petal{from{opacity:0;transform:rotate(-80deg) scale(.35)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .word{display:flex;justify-content:center;margin:42px 0 0;font-weight:200;font-size:clamp(40px,9vw,92px);letter-spacing:.22em;padding-left:.22em;line-height:1}
@@ -145,7 +145,6 @@ html[data-lang="en"] .word .words.es{display:none}
 .exw{height:100%}
 .ex{display:flex;flex-direction:column;height:100%;border-radius:28px;background:var(--card);border:1px solid var(--line);overflow:hidden;position:relative;
   transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s var(--ease),box-shadow .6s,border-color .4s;will-change:transform}
-.ex::before{content:"";position:absolute;inset:0;z-index:2;background:radial-gradient(360px circle at var(--gx,50%) var(--gy,0%),rgba(162,118,184,.2),transparent 60%);opacity:0;transition:opacity .5s;pointer-events:none}
 .ex:hover{box-shadow:0 40px 70px -35px rgba(139,86,165,.55);border-color:var(--p2)}.ex:hover::before{opacity:1}
 .art{position:relative;height:260px;display:grid;place-items:center;padding:22px;overflow:hidden;background:color-mix(in srgb,var(--p1) 12%,var(--card))}
 .meta{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:24px 28px 28px}
@@ -264,6 +263,13 @@ footer a{color:var(--mute);transition:color .3s}footer a:hover{color:var(--ink);
 .kicker{margin:0 0 18px;font-size:14px;letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:fade 1.4s ease .5s forwards}
 .word.sub{flex-wrap:wrap;column-gap:.32em;row-gap:.08em;font-size:clamp(38px,8vw,84px);letter-spacing:.05em;padding-left:0;line-height:1.05;margin-top:0}
 .word.sub .words>span{animation-delay:calc(.5s + var(--i)*.16s)}.hero.sub .tag{animation-delay:1.4s}
+@keyframes btin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.demobtn{display:inline-flex;align-items:center;gap:9px;margin-top:36px;padding:13px 27px;border-radius:999px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);color:#f8f4fa;font-size:16px;letter-spacing:.02em;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:1;animation:btin 1s var(--ease) 2.1s both;
+  transition:transform .5s var(--ease),background .3s,border-color .3s,box-shadow .5s}
+.demobtn svg{width:13px;height:13px;flex:none}
+.demobtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.3);border-color:rgba(255,255,255,.75);box-shadow:0 20px 44px -22px rgba(0,0,0,.65)}
 .bigsec{padding:0 0 clamp(90px,12vw,150px)}
 .bigart{perspective:1400px;height:clamp(340px,56vw,560px);display:grid;place-items:center;border-radius:36px;background:color-mix(in srgb,var(--p1) 12%,var(--card));border:1px solid var(--line);overflow:hidden}
 .bigart .ui{--t:0;width:340px;max-width:none;transform:rotateX(calc((1 - var(--t))*18deg)) scale(calc(1.15 + var(--t)*.4))}

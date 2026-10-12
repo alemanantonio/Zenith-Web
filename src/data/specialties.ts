@@ -18,6 +18,7 @@ export interface Specialty {
   slug: string;
   art: 'web' | 'dash' | 'inv' | 'saas';
   oss: string | null;
+  demo: string | null;
   es: SpecialtyText;
   en: SpecialtyText;
 }
@@ -27,6 +28,7 @@ export const specialties: Specialty[] = [
     slug: 'paginas-web',
     art: 'web',
     oss: null,
+    demo: null,
     es: {
       name: 'Páginas web',
       tag: 'Sitios para presentar tu negocio con claridad.',
@@ -60,6 +62,7 @@ export const specialties: Specialty[] = [
     slug: 'dashboards',
     art: 'dash',
     oss: 'https://github.com/alemanantonio/Zenith-Dashboard',
+    demo: '/demo/dashboards',
     es: {
       name: 'Dashboards personales',
       tag: 'Un panel con lo que quieres tener a la vista.',
@@ -93,6 +96,7 @@ export const specialties: Specialty[] = [
     slug: 'inventarios',
     art: 'inv',
     oss: 'https://github.com/alemanantonio/Zenith-Inventario',
+    demo: '/demo/inventarios',
     es: {
       name: 'Sistemas de inventarios',
       tag: 'Control de existencias a la medida de cómo trabajas.',
@@ -126,6 +130,7 @@ export const specialties: Specialty[] = [
     slug: 'saas',
     art: 'saas',
     oss: 'https://github.com/alemanantonio/Zenith-SaaS',
+    demo: '/demo/saas',
     es: {
       name: 'SaaS',
       tag: 'Plataformas web construidas para crecer con tu proyecto.',

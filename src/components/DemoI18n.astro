@@ -1,0 +1,106 @@
+---
+interface Props {
+  m?: Record<string, string>;
+  p?: [string, string][];
+  title?: string;
+}
+const { m = {}, p = [], title } = Astro.props;
+const json = JSON.stringify({ m, p, title }).replace(/</g, '\\u003c');
+---
+<Fragment set:html={`<script>window.__I18N=${json};</script>`} />
+<script is:inline>
+(function () {
+  var D = window.__I18N || { m: {}, p: [] };
+  var H = document.documentElement, L = null;
+  try { L = localStorage.getItem('zenith-lang'); } catch (e) {}
+  if (L !== 'es' && L !== 'en') L = (navigator.language || '').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+  H.setAttribute('data-lang', L);
+  H.setAttribute('lang', L);
+  var EN = L === 'en';
+  window.__EN = EN;
+  window.__LOC = EN ? 'en-US' : 'es-MX';
+  window.__tr = function (es, en) { return EN ? en : es; };
+  var M = Object.create(null), P = [];
+  if (EN) {
+    if (D.title) document.title = D.title;
+    Object.keys(D.m).forEach(function (k) { var v = D.m[k]; if (v && v !== k) M[k] = v; });
+    (D.p || []).forEach(function (x) { P.push([rx(x[0]), x[1]]); });
+  }
+  function rx(k) {
+    var a = k.split(/(\{[ns]\})/), re = '', i, x;
+    for (i = 0; i < a.length; i++) {
+      x = a[i];
+      if (x === '{n}') re += '(\\d+)';
+      else if (x === '{s}') re += '([\\s\\S]+?)';
+      else re += x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    return new RegExp('^' + re + '$');
+  }
+  function tr(s, d) {
+    if (!s) return s;
+    d = d || 0;
+    if (Object.prototype.hasOwnProperty.call(M, s)) return M[s];
+    if (d > 3) return s;
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i][0].exec(s);
+      if (!m) continue;
+      return P[i][1].replace(/\$(\d+)/g, function (_, g) { return tr(m[+g] || '', d + 1); });
+    }
+    return s;
+  }
+  window.__t = function (s) { return EN ? tr(s, 0) : s; };
+  if (!EN) return;
+  var ATTRS = ['aria-label', 'placeholder', 'title', 'alt'];
+  var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1 };
+  function skip(n) {
+    var p = n;
+    while (p) {
+      if (p.nodeType === 1 && (SKIP[p.tagName] || p.isContentEditable)) return true;
+      p = p.parentNode;
+    }
+    return false;
+  }
+  function txt(n) {
+    var v = n.nodeValue;
+    if (!v || !v.trim()) return;
+    var r = tr(v, 0);
+    if (r !== v) n.nodeValue = r;
+  }
+  function attrs(e) {
+    for (var i = 0; i < ATTRS.length; i++) {
+      var a = ATTRS[i], v = e.getAttribute(a);
+      if (!v) continue;
+      var r = tr(v, 0);
+      if (r !== v) e.setAttribute(a, r);
+    }
+  }
+  function node(n) {
+    if (n.nodeType === 3) { if (!skip(n)) txt(n); return; }
+    if (n.nodeType !== 1 || n.isContentEditable) return;
+    if (SKIP[n.tagName]) { if (n.tagName === 'TEXTAREA') attrs(n); return; }
+    attrs(n);
+    var c = n.firstChild;
+    while (c) { node(c); c = c.nextSibling; }
+  }
+  function run() {
+    node(document.documentElement);
+    new MutationObserver(function (ms) {
+      for (var i = 0; i < ms.length; i++) {
+        var m = ms[i];
+        if (m.type === 'childList') {
+          var a = m.addedNodes;
+          for (var j = 0; j < a.length; j++) node(a[j]);
+        } else if (m.type === 'characterData') {
+          if (m.target.nodeType === 3 && !skip(m.target)) txt(m.target);
+        } else if (m.type === 'attributes') {
+          attrs(m.target);
+        }
+      }
+    }).observe(document.documentElement, {
+      subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATTRS
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+})();
+</script>

@@ -36,6 +36,12 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
         <span class="words l en" lang="en">{s.en.name.split(' ').map((w, i) => <span style={`--i:${i}`}>{w}</span>)}</span>
       </h1>
       <p class="tag"><L es={s.es.tag} en={s.en.tag} /></p>
+      {s.demo && (
+        <a class="demobtn" href={s.demo}>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.4l7 4.6-7 4.6z" fill="currentColor"/></svg>
+          <L es="Ver la demo" en="View the demo" />
+        </a>
+      )}
     </div>
     <div class="cue"></div>
   </header>
