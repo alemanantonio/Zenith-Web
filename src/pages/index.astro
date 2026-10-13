@@ -24,16 +24,16 @@ const steps = [
   { n: '04', t: { es: 'Entrega', en: 'Delivery' }, d: { es: 'Entregamos el proyecto listo para usar. El plazo depende del tamaño del proyecto.', en: 'We deliver the project ready to use. The timeline depends on the size of the project.' } },
 ];
 const launchIncluded = [
-  { es: 'Diseño moderno y adaptable a móviles', en: 'Modern, mobile-responsive design' },
-  { es: 'Hasta 4–5 secciones', en: 'Up to 4–5 sections' },
+  { es: 'Diseño y programación de una landing page', en: 'Landing page design and development' },
+  { es: 'Hosting por un año en un dominio de Zenith', en: 'One year of hosting on a Zenith domain' },
+  { es: 'Diseño adaptable a móviles', en: 'Mobile-responsive design' },
   { es: 'Información y fotografías proporcionadas por el negocio', en: 'Information and photos provided by the business' },
-  { es: 'Botones de contacto y enlaces a redes sociales', en: 'Contact buttons and social media links' },
 ];
 const launchExcluded = [
-  { es: 'Tiendas en línea completas', en: 'Full online stores' },
-  { es: 'Sistemas administrativos', en: 'Administrative systems' },
-  { es: 'Reservaciones o pagos automatizados', en: 'Automated bookings or payments' },
-  { es: 'Hosting con dominio y mantenimiento recurrente, salvo que decidas incluirlos', en: 'Hosting and domain and recurring maintenance, unless you decide to include them' },
+  { es: 'Sistemas complejos o administrativos', en: 'Complex or administrative systems' },
+  { es: 'Páginas que no sean landing pages', en: 'Pages that are not landing pages' },
+  { es: 'Dominio propio u otros extras solicitados', en: 'Custom domains or other requested extras' },
+  { es: 'Mantenimiento después del primer año', en: 'Maintenance after the first year' },
 ];
 ---
 <Base title={title} description={description}>
@@ -95,9 +95,10 @@ const launchExcluded = [
   <section class="launch" id="lanzamiento"><div class="wrap">
     <h2 class="lm"><span><L es="Programa de Lanzamiento." en="Launch Program." /></span></h2>
     <div class="lswrap rv">
-      <span class="lbadge"><i></i><L es="5 plazas disponibles" en="5 spots available" /></span>
-      <p class="lprice"><span class="amt">$0</span><span class="per"><L es="solo para páginas web" en="websites only" /></span></p>
-      <p class="llead"><L es="Impulsamos los primeros proyectos con una página web sin costo. Las plazas son limitadas: escríbenos para reservar la tuya." en="We kick off our first projects with a website at no cost. Spots are limited: write to us to reserve yours." /></p>
+      <span class="lbadge"><i></i><L es="Hasta agotar existencias o por tiempo limitado" en="While supplies last or for a limited time" /></span>
+      <p class="lprice"><span class="amt">$0</span><span class="per"><L es="MXN · diseño, programación y hosting" en="USD · design, development and hosting" /></span></p>
+      <p class="llead"><L es="Cualquier persona puede aplicar. El Programa de Lanzamiento incluye una landing page sin costo y hosting durante un año en un dominio de Zenith. Después del primer año, solo se paga el mantenimiento si deseas conservarla." en="Everyone can apply. The Launch Program includes a landing page at no cost and one year of hosting on a Zenith domain. After the first year, maintenance is only paid if you want to keep it." /></p>
+      <a class="launch-apply" href="mailto:zenith@antonioaleman.dev?subject=Aplicación%20al%20Programa%20de%20Lanzamiento"><L es="Aplicar al programa" en="Apply to the program" /><span>→</span></a>
     </div>
     <div class="lcols">
       <div class="lcol inc rv">

@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import HelpChat from '../components/HelpChat.astro';
+import L from '../components/L.astro';
+
+const title = { es: 'Sobre Zenith · Desarrollo con propósito', en: 'About Zenith · Purposeful development' };
+const description = {
+  es: 'Conoce la historia, filosofía y forma de trabajo de Zenith, detrás de Antonio Alemán.',
+  en: 'Learn about Zenith, its philosophy and how Antonio Alemán works with clients and open source.',
+};
+const principles = [
+  { n: '01', es: 'Resolver problemas reales', en: 'Solve real problems', dEs: 'Cada proyecto responde a una necesidad concreta. Las funciones se deciden por su utilidad, no por añadir características solo porque la tecnología lo permite.', dEn: 'Every project answers a concrete need. Features are chosen for their usefulness, not added only because technology allows them.' },
+  { n: '02', es: 'Simplicidad antes que complejidad', en: 'Simplicity before complexity', dEs: 'Elegir la solución más sencilla que cumpla los requisitos, sin sacrificar seguridad, calidad ni capacidad de evolución.', dEn: 'Choose the simplest solution that meets the requirements without sacrificing security, quality or room to evolve.' },
+  { n: '03', es: 'Diseño funcional y cuidado', en: 'Functional, considered design', dEs: 'La interfaz debe ser clara, consistente y adaptable. La estética importa, pero nunca debe dificultar las tareas del usuario.', dEn: 'The interface should be clear, consistent and adaptable. Aesthetics matter, but never at the expense of the user’s tasks.' },
+  { n: '04', es: 'Seguridad y calidad desde el inicio', en: 'Security and quality from the start', dEs: 'La validación, los permisos, la protección de información y el manejo de errores se consideran desde el diseño.', dEn: 'Validation, permissions, information protection and error handling are considered from the design stage.' },
+  { n: '05', es: 'Arquitectura independiente y mantenible', en: 'Independent, maintainable architecture', dEs: 'Cada producto tiene una estructura adecuada a su propósito, documentación útil y un ciclo de desarrollo propio.', dEn: 'Each product has an architecture suited to its purpose, useful documentation and its own development cycle.' },
+  { n: '06', es: 'Evolución continua', en: 'Continuous evolution', dEs: 'Desarrollar por etapas, validar decisiones con usuarios y mejorar a partir de resultados reales.', dEn: 'Build in stages, validate decisions with users and improve from real results.' },
+];
+---
+<Base title={title} description={description}>
+  <Nav variant="sub" />
+  <header class="hero sub about-hero">
+    <div class="orb o1"></div><div class="orb o2"></div><div class="ring"></div><div class="glow"></div>
+    <div class="stage">
+      <svg class="smark" aria-hidden="true" viewBox="0 0 1000 1000"><image href="/favicon.svg" width="100%" height="100%"/></svg>
+      <p class="kicker"><L es="Sobre Zenith" en="About Zenith" /></p>
+      <h1 class="word sub"><span class="words"><L es="Código con propósito." en="Code with purpose." /></span></h1>
+      <p class="tag"><L es="Una forma de hacer convivir el software privado y el open source sin ponerlos en competencia." en="A way to let private software and open source coexist without putting them in competition." /></p>
+    </div>
+  </header>
+
+  <section class="about-intro"><div class="wrap">
+    <p class="about-lead"><L es="Zenith existe detrás de Antonio Alemán para construir software útil y mantener una relación sana entre el código privado y el código abierto." en="Zenith exists behind Antonio Alemán to build useful software and create a healthy relationship between private and open source code." /></p>
+    <div class="about-grid">
+      <div class="pr rv"><h2><L es="Quién está detrás" en="Who is behind it" /></h2><p><L es="Antonio Alemán desarrolla Zenith y mantiene sus proyectos open source en GitHub." en="Antonio Alemán develops Zenith and maintains its open source projects on GitHub." /></p><a class="about-link" href="https://github.com/alemanantonio" target="_blank" rel="noreferrer">github.com/alemanantonio →</a></div>
+      <div class="pr rv"><h2><L es="Para quién es" en="Who it is for" /></h2><p><L es="Buscamos cualquier tipo de cliente: desde programadores senior hasta personas con un negocio y sin experiencia en desarrollo web." en="We work with every kind of client: from senior programmers to people with a business and no web development experience." /></p></div>
+      <div class="pr rv"><h2><L es="Cómo nos comunicamos" en="How we communicate" /></h2><p><L es="Trabajamos en UTC−6, Ciudad de México. Una vez aprobado el proyecto, nos comunicamos por WhatsApp durante el desarrollo." en="We work in UTC−6, Mexico City. Once a project is approved, we communicate through WhatsApp during development." /></p></div>
+    </div>
+  </div></section>
+
+  <section class="principles about-principles"><div class="wrap">
+    <h2 class="lm"><span><L es="Nuestra filosofía." en="Our philosophy." /></span></h2>
+    <div class="pgrid">{principles.map((p) => <div class="pr rv"><span class="num">{p.n}</span><h3><L es={p.es} en={p.en} /></h3><p><L es={p.dEs} en={p.dEn} /></p></div>)}</div>
+  </div></section>
+
+  <Footer />
+  <HelpChat />
+</Base>

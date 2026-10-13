@@ -10,6 +10,7 @@ export interface SpecialtyText {
   cta: string;
   description: string;
   price: string;
+  startingPrice: string;
   support: string;
   pr: { t: string; d: string }[];
 }
@@ -36,6 +37,7 @@ export const specialties: Specialty[] = [
       cta: 'Hablemos de tu página web.',
       description: 'Páginas web a la medida de tu negocio, construidas por un equipo full stack. Tú no tocas código.',
       price: 'El precio depende del tamaño del proyecto y se cotiza según el alcance de cada página.',
+      startingPrice: 'Desde $2,000 MXN',
       support: 'Renovación anual por mantenimiento, hosting y actualizaciones. La página web se construye a la medida del cliente y no incluye open source: se mantiene como sistema de pago.',
       pr: [
         { t: 'Pensadas para tu negocio', d: 'Cada página se construye para presentar tu negocio con claridad.' },
@@ -50,6 +52,7 @@ export const specialties: Specialty[] = [
       cta: "Let's talk about your website.",
       description: 'Custom websites for your business, built by a full stack team. You do not touch code.',
       price: 'The price depends on the size of the project and is quoted based on the scope of each site.',
+      startingPrice: 'From $100 USD',
       support: 'Annual renewal for maintenance, hosting and updates. The website is custom-built to the client\u2019s needs and has no open source: it is kept as a paid system.',
       pr: [
         { t: 'Built for your business', d: 'Every page is built to present your business with clarity.' },
@@ -70,6 +73,7 @@ export const specialties: Specialty[] = [
       cta: 'Hablemos de tu dashboard.',
       description: 'Dashboards personales a tu medida: tus datos en un solo panel, sin tocar código.',
       price: 'El precio depende del tamaño del proyecto. El dashboard incluye más funcionalidades y siempre está alojado por nuestra parte.',
+      startingPrice: 'Desde $10,000 MXN',
       support: 'Renovación anual con alojamiento más premium, siempre alojado por nuestra parte.',
       pr: [
         { t: 'A tu medida', d: 'Tu dashboard se personaliza para mostrar lo que tú necesitas ver.' },
@@ -84,6 +88,7 @@ export const specialties: Specialty[] = [
       cta: "Let's talk about your dashboard.",
       description: 'Personal dashboards built around you: your data in one panel, no code required.',
       price: 'The price depends on the size of the project. The dashboard includes more features and is always hosted by us.',
+      startingPrice: 'From $500 USD',
       support: 'Annual renewal with more premium hosting, always hosted by us.',
       pr: [
         { t: 'Built around you', d: 'Your dashboard is customized to show what you need to see.' },
@@ -104,6 +109,7 @@ export const specialties: Specialty[] = [
       cta: 'Hablemos de tu sistema de inventarios.',
       description: 'Sistemas de inventarios a la medida de tu operación: control de existencias sin tocar código.',
       price: 'El precio depende del tamaño del proyecto. El sistema de inventarios incluye más funcionalidades y siempre está alojado por nuestra parte.',
+      startingPrice: 'Desde $25,000 MXN',
       support: 'Renovación anual con alojamiento más premium, siempre alojado por nuestra parte.',
       pr: [
         { t: 'A la medida', d: 'Se adapta a la forma en que trabajas, no al revés.' },
@@ -118,6 +124,7 @@ export const specialties: Specialty[] = [
       cta: "Let's talk about your inventory system.",
       description: 'Inventory systems built around your operation: stock control without touching code.',
       price: 'The price depends on the size of the project. The inventory system includes more features and is always hosted by us.',
+      startingPrice: 'From $1,250 USD',
       support: 'Annual renewal with more premium hosting, always hosted by us.',
       pr: [
         { t: 'Made to measure', d: 'It adapts to the way you work, not the other way around.' },
@@ -138,6 +145,7 @@ export const specialties: Specialty[] = [
       cta: 'Hablemos de tu SaaS.',
       description: 'Plataformas SaaS construidas de principio a fin por un equipo full stack, para crecer con tu proyecto.',
       price: 'El precio depende del tamaño del proyecto. El SaaS incluye más funcionalidades y siempre está alojado por nuestra parte.',
+      startingPrice: 'Cotización personalizada',
       support: 'Renovación anual con alojamiento más premium, siempre alojado por nuestra parte.',
       pr: [
         { t: 'Pensado para crecer', d: 'Plataformas web construidas para crecer con tu proyecto.' },
@@ -152,6 +160,7 @@ export const specialties: Specialty[] = [
       cta: "Let's talk about your SaaS.",
       description: 'SaaS platforms built end to end by a full stack team, designed to grow with your project.',
       price: 'The price depends on the size of the project. The SaaS includes more features and is always hosted by us.',
+      startingPrice: 'Custom quote',
       support: 'Annual renewal with more premium hosting, always hosted by us.',
       pr: [
         { t: 'Built to grow', d: 'Web platforms built to grow with your project.' },

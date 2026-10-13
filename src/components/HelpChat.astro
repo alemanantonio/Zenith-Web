@@ -5,6 +5,7 @@ import L from './L.astro';
 const questions = [
   {
     id: 'zenith',
+    category: 'general',
     es: '¿Qué es Zenith?',
     en: 'What is Zenith?',
     answerEs: 'Zenith es un equipo de desarrollo full stack. Construimos software para que tú no tengas que tocar código y ofrecemos open source para quien sí sabe programar.',
@@ -12,6 +13,7 @@ const questions = [
   },
   {
     id: 'software',
+    category: 'general',
     es: '¿Qué tipo de software construyen?',
     en: 'What kind of software do you build?',
     answerEs: 'Construimos páginas web, dashboards personales, sistemas de inventarios y SaaS a la medida de cada proyecto.',
@@ -19,6 +21,7 @@ const questions = [
   },
   {
     id: 'price',
+    category: 'project',
     es: '¿Cuánto cuesta un proyecto?',
     en: 'How much does a project cost?',
     answerEs: 'El precio depende del tamaño y alcance del proyecto. Cada especialidad tiene un precio y soporte distintos; escríbenos y te enviamos una propuesta.',
@@ -26,6 +29,7 @@ const questions = [
   },
   {
     id: 'time',
+    category: 'project',
     es: '¿Cuánto tarda?',
     en: 'How long does it take?',
     answerEs: 'El plazo depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo.',
@@ -33,6 +37,7 @@ const questions = [
   },
   {
     id: 'code',
+    category: 'general',
     es: '¿Necesito saber programar?',
     en: 'Do I need to know how to code?',
     answerEs: 'No. Nuestro equipo se encarga del código para que tú solo tengas que usar tu software.',
@@ -40,6 +45,7 @@ const questions = [
   },
   {
     id: 'support',
+    category: 'project',
     es: '¿Qué incluye el soporte?',
     en: 'What does support include?',
     answerEs: 'El soporte se renueva anualmente. Las páginas web incluyen mantenimiento y hosting; dashboards, inventarios y SaaS incluyen alojamiento premium administrado por Zenith.',
@@ -47,11 +53,17 @@ const questions = [
   },
   {
     id: 'open-source',
+    category: 'developer',
     es: '¿Puedo revisar el código?',
     en: 'Can I review the code?',
     answerEs: 'Sí. Para quien programa ofrecemos open source en dashboards, inventarios y SaaS. Las páginas web se mantienen como un sistema de pago.',
     answerEn: 'Yes. For those who program, we offer open source for dashboards, inventory systems and SaaS. Websites remain a paid system.',
   },
+];
+const categories = [
+  { id: 'general', es: 'Conocer Zenith', en: 'About Zenith' },
+  { id: 'project', es: 'Mi proyecto', en: 'My project' },
+  { id: 'developer', es: 'Soy programador', en: 'I am a developer' },
 ];
 ---
 
@@ -76,17 +88,24 @@ const questions = [
       <div class="help-chat-message bot">
         <p><L es="Hola, soy el asistente de Zenith. Selecciona una pregunta y te orientaré." en="Hi, I am the Zenith assistant. Select a question and I will point you in the right direction." /></p>
       </div>
-      <div class="help-chat-prompts" data-chat-prompts>
+      <div class="help-chat-progress" aria-live="polite"><span data-chat-progress>1</span>{' '}<L es="de 3 pasos" en="of 3 steps" /></div>
+      <div class="help-chat-categories" data-chat-categories>
+        {categories.map((category) => (
+          <button type="button" data-category={category.id}><span>{category.es}</span><span>{category.en}</span></button>
+        ))}
+      </div>
+      <div class="help-chat-prompts is-hidden" data-chat-prompts>
         {questions.map((question) => (
-          <button type="button" data-id={question.id} data-es={question.es} data-en={question.en} data-answer-es={question.answerEs} data-answer-en={question.answerEn}>
+          <button type="button" data-id={question.id} data-category={question.category} data-es={question.es} data-en={question.en} data-answer-es={question.answerEs} data-answer-en={question.answerEn}>
             <span>{question.es}</span><span>{question.en}</span>
           </button>
         ))}
       </div>
+      <a class="help-chat-final" data-chat-final href={`mailto:${EMAIL}?subject=Quiero%20hablar%20sobre%20mi%20proyecto`}><L es="Cuéntanos tu idea →" en="Tell us about your idea →" /></a>
     </div>
     <footer class="help-chat-foot">
       <button type="button" class="help-chat-reset" data-chat-reset><L es="Reiniciar conversación" en="Restart conversation" /></button>
-      <a href={`mailto:${EMAIL}`}><L es="Hablar con el equipo →" en="Talk to the team →" /></a>
+      <span class="help-chat-note"><L es="Respuestas predefinidas" en="Predefined answers" /></span>
     </footer>
   </section>
 </div>
@@ -99,6 +118,9 @@ const questions = [
     var panel = root.querySelector('.help-chat-panel');
     var body = root.querySelector('[data-chat-body]');
     var prompts = root.querySelector('[data-chat-prompts]');
+    var categories = root.querySelector('[data-chat-categories]');
+    var progress = root.querySelector('[data-chat-progress]');
+    var final = root.querySelector('[data-chat-final]');
     var close = root.querySelector('.help-chat-close');
     var reset = root.querySelector('[data-chat-reset]');
     var initialBody = body.innerHTML;
@@ -106,7 +128,7 @@ const questions = [
       root.classList.add('is-open');
       bubble.setAttribute('aria-expanded', 'true');
       panel.setAttribute('aria-hidden', 'false');
-      setTimeout(function () { var first = prompts.querySelector('button'); if (first) first.focus(); }, 100);
+      setTimeout(function () { var first = categories.querySelector('button'); if (first) first.focus(); }, 100);
     };
     var shut = function () {
       root.classList.remove('is-open');
@@ -136,7 +158,18 @@ const questions = [
         thinking.remove();
         addMessage(text(button, 'data-answer'), 'bot');
         prompts.classList.remove('is-hidden');
+        final.classList.add('is-visible');
+        if (progress) progress.textContent = '3';
       }, 850);
+    };
+    var chooseCategory = function (button) {
+      var category = button.getAttribute('data-category');
+      categories.classList.add('is-hidden');
+      prompts.classList.remove('is-hidden');
+      prompts.querySelectorAll('button').forEach(function (question) {
+        question.hidden = question.getAttribute('data-category') !== category;
+      });
+      if (progress) progress.textContent = '2';
     };
     var updatePromptLanguage = function () {
       prompts.querySelectorAll('button').forEach(function (button) {
@@ -146,11 +179,17 @@ const questions = [
     bubble.addEventListener('click', function () { root.classList.contains('is-open') ? shut() : open(); });
     close.addEventListener('click', shut);
     prompts.querySelectorAll('button').forEach(function (button) { button.addEventListener('click', function () { ask(button); }); });
+    categories.querySelectorAll('button').forEach(function (button) { button.addEventListener('click', function () { chooseCategory(button); }); });
     updatePromptLanguage();
     reset.addEventListener('click', function () {
       body.innerHTML = initialBody;
       prompts = root.querySelector('[data-chat-prompts]');
+      categories = root.querySelector('[data-chat-categories]');
+      progress = root.querySelector('[data-chat-progress]');
+      final = root.querySelector('[data-chat-final]');
       prompts.querySelectorAll('button').forEach(function (button) { button.addEventListener('click', function () { ask(button); }); });
+      categories.querySelectorAll('button').forEach(function (button) { button.addEventListener('click', function () { chooseCategory(button); }); });
+      final.classList.remove('is-visible');
       body.scrollTop = 0;
     });
     document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && root.classList.contains('is-open')) shut(); });

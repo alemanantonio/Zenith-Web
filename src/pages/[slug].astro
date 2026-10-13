@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import Cta from '../components/Cta.astro';
 import Illustration from '../components/Illustration.astro';
 import OssCard from '../components/OssCard.astro';
+import HelpChat from '../components/HelpChat.astro';
 import L from '../components/L.astro';
 import { specialties, type Specialty } from '../data/specialties';
 
@@ -18,9 +19,10 @@ const others = specialties.filter((o) => o.slug !== s.slug);
 const arrow = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const title = { es: `${s.es.name} · Zenith`, en: `${s.en.name} · Zenith` };
 const description = { es: s.es.description, en: s.en.description };
+const image = `/og-${s.slug}.svg`;
 const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
 ---
-<Base title={title} description={description}>
+<Base title={title} description={description} image={image} service={{ es: s.es.name, en: s.en.name, description }}>
   <Nav variant="sub" />
   <Veil />
 
@@ -70,7 +72,7 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
   <section class="principles" id="precio"><div class="wrap">
     <h2 class="lm"><span><L es="Precio y soporte." en="Price and support." /></span></h2>
     <div class="pgrid">
-      <div class="pr rv"><h3><L es="Precio" en="Price" /></h3><p><L es={s.es.price} en={s.en.price} /></p></div>
+      <div class="pr price-card rv"><h3><L es="Precio" en="Price" /></h3><strong><L es={s.es.startingPrice} en={s.en.startingPrice} /></strong><p><L es={s.es.price} en={s.en.price} /></p></div>
       <div class="pr rv"><h3><L es="Plazo" en="Timeline" /></h3><p><L es="El plazo depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo." en="The timeline depends on the size of the project, but you always receive progress updates during development." /></p></div>
       <div class="pr rv"><h3><L es="Soporte" en="Support" /></h3><p><L es={s.es.support} en={s.en.support} /></p></div>
     </div>
@@ -95,4 +97,5 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
   <Cta heading={{ es: s.es.cta, en: s.en.cta }} />
 
   <Footer />
+  <HelpChat />
 </Base>
