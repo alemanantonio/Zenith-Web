@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Veil from '../components/Veil.astro';
 import Footer from '../components/Footer.astro';
+import HelpChat from '../components/HelpChat.astro';
 import Cta from '../components/Cta.astro';
 import Illustration from '../components/Illustration.astro';
 import L from '../components/L.astro';
@@ -16,15 +17,6 @@ const description = {
 const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
 const statementEs = 'Un equipo full stack que construye tu software, para que tú no tengas que tocar código.';
 const statementEn = 'A full stack team that builds your software, so you never have to touch code.';
-const faq = [
-  { q: { es: '¿Qué es Zenith?', en: 'What is Zenith?' }, a: { es: 'Un equipo de desarrollo full stack. Construimos software para que tú no tengas que tocar código, y ofrecemos open source para quien sí sabe programar.', en: 'A full stack development team. We build software so you do not have to touch code, and we offer open source for those who do program.' } },
-  { q: { es: '¿Qué software construyen?', en: 'What software do you build?' }, a: { es: 'Por ejemplo, páginas web, dashboards personales, sistemas de inventarios y SaaS, entre otros.', en: 'For example, websites, personal dashboards, inventory systems and SaaS, among others.' } },
-  { q: { es: '¿Cuánto cuesta?', en: 'How much does it cost?' }, a: { es: 'El precio depende del tamaño del proyecto. Cada especialidad explica su precio y su soporte; escríbenos y te enviamos una propuesta.', en: 'The price depends on the size of the project. Each specialty explains its pricing and support; write to us and we will send you a proposal.' } },
-  { q: { es: '¿Cuánto tarda?', en: 'How long does it take?' }, a: { es: 'El plazo de entrega depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo.', en: 'The delivery time depends on the size of the project, but you always receive progress updates during development.' } },
-  { q: { es: '¿Qué incluye el soporte?', en: 'What does support include?' }, a: { es: 'El soporte se renueva anualmente. Las páginas web incluyen mantenimiento y hosting; dashboards, inventarios y SaaS incluyen alojamiento más premium y siempre están alojados por nuestra parte.', en: 'Support renews annually. Websites include maintenance and hosting; dashboards, inventory systems and SaaS include more premium hosting and are always hosted by us.' } },
-  { q: { es: '¿Necesito saber programar?', en: 'Do I need to know how to program?' }, a: { es: 'No. Nuestro equipo se encarga del código para que tú no tengas que tocarlo. Si sí programas, ofrecemos open source que puedes instalar y alojar por tu cuenta.', en: 'No. Our team handles the code so you do not have to touch it. If you do program, we offer open source you can install and host yourself.' } },
-  { q: { es: '¿Puedo revisar el código?', en: 'Can I review the code?' }, a: { es: 'Sí, para quien programa ofrecemos open source en dashboards, inventarios y SaaS. Las páginas web se mantienen como sistema de pago.', en: 'Yes, for those who program we offer open source for dashboards, inventory systems and SaaS. Websites are kept as a paid system.' } },
-];
 const steps = [
   { n: '01', t: { es: 'Contacto', en: 'Contact' }, d: { es: 'Escríbenos y cuéntanos qué necesitas; te atendemos de 7:00 a 17:00, hora de la Ciudad de México.', en: 'Write to us and tell us what you need; we are available from 7:00 AM to 5:00 PM, Mexico City time.' } },
   { n: '02', t: { es: 'Propuesta', en: 'Proposal' }, d: { es: 'Te enviamos una propuesta con alcance y precio; este depende del tamaño del proyecto.', en: 'We send you a proposal with scope and price; the price depends on the size of the project.' } },
@@ -127,14 +119,8 @@ const launchExcluded = [
     </div>
   </div></section>
 
-  <section class="faq" id="preguntas"><div class="wrap">
-    <h2 class="lm"><span><L es="Preguntas frecuentes." en="Frequently asked questions." /></span></h2>
-    {faq.map((f) => (
-      <div class="qa rv"><button aria-expanded="false"><L es={f.q.es} en={f.q.en} /><i></i></button><div class="ans"><div><p><L es={f.a.es} en={f.a.en} /></p></div></div></div>
-    ))}
-  </div></section>
-
   <Cta heading={{ es: 'Hablemos de tu proyecto.', en: "Let's talk about your project." }} />
 
   <Footer />
+  <HelpChat />
 </Base>

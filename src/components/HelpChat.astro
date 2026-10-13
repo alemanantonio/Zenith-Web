@@ -1,0 +1,158 @@
+---
+import { EMAIL } from '../data/specialties';
+import L from './L.astro';
+
+const questions = [
+  {
+    id: 'zenith',
+    es: '¿Qué es Zenith?',
+    en: 'What is Zenith?',
+    answerEs: 'Zenith es un equipo de desarrollo full stack. Construimos software para que tú no tengas que tocar código y ofrecemos open source para quien sí sabe programar.',
+    answerEn: 'Zenith is a full stack development team. We build software so you do not have to touch code, and offer open source for those who do program.',
+  },
+  {
+    id: 'software',
+    es: '¿Qué tipo de software construyen?',
+    en: 'What kind of software do you build?',
+    answerEs: 'Construimos páginas web, dashboards personales, sistemas de inventarios y SaaS a la medida de cada proyecto.',
+    answerEn: 'We build websites, personal dashboards, inventory systems and SaaS tailored to each project.',
+  },
+  {
+    id: 'price',
+    es: '¿Cuánto cuesta un proyecto?',
+    en: 'How much does a project cost?',
+    answerEs: 'El precio depende del tamaño y alcance del proyecto. Cada especialidad tiene un precio y soporte distintos; escríbenos y te enviamos una propuesta.',
+    answerEn: 'Pricing depends on the size and scope of the project. Each specialty has different pricing and support; write to us and we will send you a proposal.',
+  },
+  {
+    id: 'time',
+    es: '¿Cuánto tarda?',
+    en: 'How long does it take?',
+    answerEs: 'El plazo depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo.',
+    answerEn: 'The timeline depends on the project size, but you always receive progress updates during development.',
+  },
+  {
+    id: 'code',
+    es: '¿Necesito saber programar?',
+    en: 'Do I need to know how to code?',
+    answerEs: 'No. Nuestro equipo se encarga del código para que tú solo tengas que usar tu software.',
+    answerEn: 'No. Our team handles the code so you only have to use your software.',
+  },
+  {
+    id: 'support',
+    es: '¿Qué incluye el soporte?',
+    en: 'What does support include?',
+    answerEs: 'El soporte se renueva anualmente. Las páginas web incluyen mantenimiento y hosting; dashboards, inventarios y SaaS incluyen alojamiento premium administrado por Zenith.',
+    answerEn: 'Support renews annually. Websites include maintenance and hosting; dashboards, inventory systems and SaaS include premium hosting managed by Zenith.',
+  },
+  {
+    id: 'open-source',
+    es: '¿Puedo revisar el código?',
+    en: 'Can I review the code?',
+    answerEs: 'Sí. Para quien programa ofrecemos open source en dashboards, inventarios y SaaS. Las páginas web se mantienen como un sistema de pago.',
+    answerEn: 'Yes. For those who program, we offer open source for dashboards, inventory systems and SaaS. Websites remain a paid system.',
+  },
+];
+---
+
+<div class="help-chat help-chat-enter" data-help-chat>
+  <button class="help-chat-bubble" type="button" aria-expanded="false" aria-controls="help-chat-panel">
+    <span class="help-chat-bubble-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v6a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3v-3.1a2.5 2.5 0 0 1-2.4-2.4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 9.5h7M8.5 12h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </span>
+    <span class="help-chat-bubble-label"><L es="Ayuda" en="Help" /></span>
+  </button>
+
+  <section class="help-chat-panel" id="help-chat-panel" aria-label="Zenith assistant" aria-hidden="true">
+    <header class="help-chat-head">
+      <div class="help-chat-avatar" aria-hidden="true">Z</div>
+      <div>
+        <strong>Zenith Assistant</strong>
+        <span><i></i><L es="Respuestas instantáneas" en="Instant answers" /></span>
+      </div>
+      <button class="help-chat-close" type="button" aria-label="Cerrar"><span></span><span></span></button>
+    </header>
+    <div class="help-chat-body" data-chat-body>
+      <div class="help-chat-message bot">
+        <p><L es="Hola, soy el asistente de Zenith. Selecciona una pregunta y te orientaré." en="Hi, I am the Zenith assistant. Select a question and I will point you in the right direction." /></p>
+      </div>
+      <div class="help-chat-prompts" data-chat-prompts>
+        {questions.map((question) => (
+          <button type="button" data-id={question.id} data-es={question.es} data-en={question.en} data-answer-es={question.answerEs} data-answer-en={question.answerEn}>
+            <span>{question.es}</span><span>{question.en}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+    <footer class="help-chat-foot">
+      <button type="button" class="help-chat-reset" data-chat-reset><L es="Reiniciar conversación" en="Restart conversation" /></button>
+      <a href={`mailto:${EMAIL}`}><L es="Hablar con el equipo →" en="Talk to the team →" /></a>
+    </footer>
+  </section>
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.querySelector('[data-help-chat]');
+    if (!root) return;
+    var bubble = root.querySelector('.help-chat-bubble');
+    var panel = root.querySelector('.help-chat-panel');
+    var body = root.querySelector('[data-chat-body]');
+    var prompts = root.querySelector('[data-chat-prompts]');
+    var close = root.querySelector('.help-chat-close');
+    var reset = root.querySelector('[data-chat-reset]');
+    var initialBody = body.innerHTML;
+    var open = function () {
+      root.classList.add('is-open');
+      bubble.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
+      setTimeout(function () { var first = prompts.querySelector('button'); if (first) first.focus(); }, 100);
+    };
+    var shut = function () {
+      root.classList.remove('is-open');
+      bubble.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+      bubble.focus();
+    };
+    var lang = function () { return document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'es'; };
+    var text = function (el, key) { return el.getAttribute(key + '-' + lang()) || ''; };
+    var addMessage = function (content, type) {
+      var item = document.createElement('div');
+      item.className = 'help-chat-message ' + type;
+      item.innerHTML = '<p>' + content.replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }) + '</p>';
+      body.appendChild(item);
+      body.scrollTop = body.scrollHeight;
+    };
+    var ask = function (button) {
+      var question = text(button, 'data');
+      addMessage(question, 'user');
+      prompts.classList.add('is-hidden');
+      var thinking = document.createElement('div');
+      thinking.className = 'help-chat-message bot thinking';
+      thinking.innerHTML = '<p><span></span><span></span><span></span></p>';
+      body.appendChild(thinking);
+      body.scrollTop = body.scrollHeight;
+      window.setTimeout(function () {
+        thinking.remove();
+        addMessage(text(button, 'data-answer'), 'bot');
+        prompts.classList.remove('is-hidden');
+      }, 850);
+    };
+    var updatePromptLanguage = function () {
+      prompts.querySelectorAll('button').forEach(function (button) {
+        button.setAttribute('aria-label', text(button, 'data'));
+      });
+    };
+    bubble.addEventListener('click', function () { root.classList.contains('is-open') ? shut() : open(); });
+    close.addEventListener('click', shut);
+    prompts.querySelectorAll('button').forEach(function (button) { button.addEventListener('click', function () { ask(button); }); });
+    updatePromptLanguage();
+    reset.addEventListener('click', function () {
+      body.innerHTML = initialBody;
+      prompts = root.querySelector('[data-chat-prompts]');
+      prompts.querySelectorAll('button').forEach(function (button) { button.addEventListener('click', function () { ask(button); }); });
+      body.scrollTop = 0;
+    });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && root.classList.contains('is-open')) shut(); });
+  }());
+</script>

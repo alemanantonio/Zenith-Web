@@ -165,7 +165,6 @@ $$('.lang [data-setlang]').forEach(function(b){b.addEventListener('click',functi
   veilTo(x,y,function(){applyLang(l)});
 })});
 $$('.lang [data-setlang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setlang===document.documentElement.getAttribute('data-lang')?'true':'false')});
-$$('.qa button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentNode,o=q.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
 onScroll();
 if(reduce)return;
 $$('.hero').forEach(function(h){h.addEventListener('pointermove',function(e){var r=h.getBoundingClientRect();h.style.setProperty('--mx',(e.clientX-r.left)+'px');h.style.setProperty('--my',(e.clientY-r.top)+'px')})});
