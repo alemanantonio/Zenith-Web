@@ -1,0 +1,91 @@
+---
+const petal = 'M 28 427 A 300 300 0 1 1 572 427 A 385 385 0 0 0 28 427 Z';
+---
+<div class="hero-mark" data-hero-mark>
+  <svg class="fallback" viewBox="-10 -10 1020 1020" role="img" aria-label="Zenith">
+    <g fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round">
+      {[0, 90, 180, 270].map((angle) => <path d={petal} transform={`rotate(${angle} 500 500)`} />)}
+    </g>
+  </svg>
+  <canvas data-petal={petal} role="img" aria-label="Zenith" hidden></canvas>
+</div>
+
+<style>
+  .hero-mark{position:relative;width:100%;aspect-ratio:1;color:#f8f4fa;overflow:visible}
+  .fallback{display:block;width:100%;height:100%;overflow:visible}
+  /* Extra drawing space contains the petals throughout their rotation. */
+  canvas{position:absolute;inset:-25%;width:150%;height:150%}
+  [hidden]{display:none}
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-hero-mark]');
+  const canvas = root?.querySelector('canvas');
+  const fallback = root?.querySelector<SVGSVGElement>('.fallback');
+  const ctx = canvas?.getContext('2d');
+  if (root && canvas && fallback && ctx) {
+    const path = new Path2D(canvas.dataset.petal!);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const start = performance.now();
+    let frame = 0;
+    let visible = true;
+    let density = 0;
+
+    function draw(now: number) {
+      frame = 0;
+      if (!root || !canvas || !ctx) return;
+      // Supersample at twice the screen density, including browser zoom.
+      density = Math.max(1, devicePixelRatio || 1) * 2;
+      const pixels = Math.max(1, Math.ceil(root.getBoundingClientRect().width * 1.5 * density));
+      if (canvas.width !== pixels || canvas.height !== pixels) {
+        canvas.width = pixels;
+        canvas.height = pixels;
+      }
+      ctx.resetTransform();
+      ctx.clearRect(0, 0, pixels, pixels);
+      // Keep the original 1020-unit logo size within a 1530-unit canvas.
+      const scale = pixels / 1530;
+      ctx.setTransform(scale, 0, 0, scale, pixels / 2, pixels / 2);
+      const elapsed = now - start;
+      const turn = reduced.matches ? 0 : Math.max(0, elapsed - 2400) / 70000 * Math.PI * 2;
+      ctx.rotate(turn % (Math.PI * 2));
+      ctx.fillStyle = '#f8f4fa';
+      ctx.strokeStyle = '#f8f4fa';
+      ctx.lineWidth = 6;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      for (let i = 0; i < 4; i++) {
+        const progress = reduced.matches ? 1 : Math.min(1, Math.max(0, (elapsed - 200 - i * 140) / 1500));
+        const ease = 1 - Math.pow(1 - progress, 4);
+        ctx.save();
+        ctx.rotate(i * Math.PI / 2 + (-80 * Math.PI / 180) * (1 - ease));
+        ctx.scale(.35 + .65 * ease, .35 + .65 * ease);
+        ctx.translate(-500, -500);
+        ctx.globalAlpha = ease;
+        ctx.fill(path);
+        ctx.stroke(path);
+        ctx.restore();
+      }
+      if (visible && !document.hidden && !reduced.matches) frame = requestAnimationFrame(draw);
+    }
+
+    function refresh() {
+      cancelAnimationFrame(frame);
+      draw(performance.now());
+    }
+
+    // The SVG remains available until the first canvas frame is ready.
+    refresh();
+    canvas.hidden = false;
+    fallback.style.display = 'none';
+    fallback.setAttribute('aria-hidden', 'true');
+    new ResizeObserver(refresh).observe(root);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      refresh();
+    }).observe(root);
+    reduced.addEventListener('change', refresh);
+    document.addEventListener('visibilitychange', refresh);
+    window.addEventListener('resize', refresh);
+  }
+</script>

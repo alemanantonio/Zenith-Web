@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'web' | 'dash' | 'inv' | 'saas';
+  type: 'web' | 'dash' | 'inv' | 'saas' | 'auto' | 'api';
 }
 const { type } = Astro.props;
 ---
@@ -15,4 +15,36 @@ const { type } = Astro.props;
 )}
 {type === 'saas' && (
   <div class="ui saas"><div class="sh"><div class="avs"><span class="av" style="--k:0"></span><span class="av" style="--k:1"></span><span class="av" style="--k:2"></span><span class="av" style="--k:3"></span></div><span class="tg"><i></i></span></div><div class="steps"><b style="--h:28%;--k:0"></b><b style="--h:42%;--k:1"></b><b style="--h:55%;--k:2"></b><b style="--h:74%;--k:3"></b><b style="--h:100%;--k:4"></b></div></div>
+)}
+{type === 'auto' && (
+  <div class="ui auto">
+    <div class="pl">
+      <div class="pn"><i></i></div>
+      <span class="ptrack"><b class="pdot"></b></span>
+      <div class="pn"><i></i></div>
+      <span class="ptrack"><b class="pdot d1"></b></span>
+      <div class="pn done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="alog">
+      <div class="arow" style="--f:0.85;--k:0"><span class="sk"></span><span class="tr"><em></em></span></div>
+      <div class="arow" style="--f:0.55;--k:1"><span class="sk"></span><span class="tr"><em></em></span></div>
+      <div class="arow" style="--f:0.7;--k:2"><span class="sk"></span><span class="tr"><em></em></span></div>
+    </div>
+  </div>
+)}
+{type === 'api' && (
+  <div class="ui api">
+    <div class="apwrap">
+      <div class="apc left"><b style="--k:0"></b><b style="--k:1"></b><b style="--k:2"></b></div>
+      <div class="aplines">
+        <span class="apline req"><i></i></span>
+        <span class="apline res"><i></i></span>
+      </div>
+      <div class="apc right"><span class="apg"><i></i></span></div>
+    </div>
+    <div class="alog">
+      <div class="arow" style="--f:0.75;--k:0"><span class="sk"></span><span class="tr"><em></em></span></div>
+      <div class="arow" style="--f:0.45;--k:1"><span class="sk"></span><span class="tr"><em></em></span></div>
+    </div>
+  </div>
 )}

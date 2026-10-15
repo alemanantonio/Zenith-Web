@@ -5,7 +5,6 @@ import Veil from '../components/Veil.astro';
 import Footer from '../components/Footer.astro';
 import Cta from '../components/Cta.astro';
 import Illustration from '../components/Illustration.astro';
-import OssCard from '../components/OssCard.astro';
 import HelpChat from '../components/HelpChat.astro';
 import L from '../components/L.astro';
 import { specialties, type Specialty } from '../data/specialties';
@@ -17,6 +16,7 @@ export function getStaticPaths() {
 const { s } = Astro.props as { s: Specialty };
 const others = specialties.filter((o) => o.slug !== s.slug);
 const arrow = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const play = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.4l7 4.6-7 4.6z" fill="currentColor"/></svg>';
 const title = { es: `${s.es.name} · Zenith`, en: `${s.en.name} · Zenith` };
 const description = { es: s.es.description, en: s.en.description };
 const image = `/og-${s.slug}.svg`;
@@ -38,12 +38,6 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
         <span class="words l en" lang="en">{s.en.name.split(' ').map((w, i) => <span style={`--i:${i}`}>{w}</span>)}</span>
       </h1>
       <p class="tag"><L es={s.es.tag} en={s.en.tag} /></p>
-      {s.demo && (
-        <a class="demobtn" href={s.demo}>
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.4l7 4.6-7 4.6z" fill="currentColor"/></svg>
-          <L es="Ver la demo" en="View the demo" />
-        </a>
-      )}
     </div>
     <div class="cue"></div>
   </header>
@@ -69,21 +63,50 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
     </div>
   </div></section>
 
-  <section class="principles" id="precio"><div class="wrap">
-    <h2 class="lm"><span><L es="Precio y soporte." en="Price and support." /></span></h2>
-    <div class="pgrid">
-      <div class="pr price-card rv"><h3><L es="Precio" en="Price" /></h3><strong><L es={s.es.startingPrice} en={s.en.startingPrice} /></strong><p><L es={s.es.price} en={s.en.price} /></p></div>
-      <div class="pr rv"><h3><L es="Plazo" en="Timeline" /></h3><p><L es="El plazo depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo." en="The timeline depends on the size of the project, but you always receive progress updates during development." /></p></div>
-      <div class="pr rv"><h3><L es="Soporte" en="Support" /></h3><p><L es={s.es.support} en={s.en.support} /></p></div>
-    </div>
-    {s.oss ? (
-      <div class="oss-grid rv">
-        <OssCard name={s.oss.split('/').pop()!} url={s.oss} />
+  {s.products && s.products.length > 0 && (
+    <section class="services" id="productos"><div class="wrap">
+      <h2 class="lm"><span><L es="Productos open source y versiones a medida." en="Open source products and custom versions." /></span></h2>
+      <p class="lead rv"><L es="Dashboard, inventario y SaaS: puedes usar gratis el código abierto y alojarlo por tu cuenta. Si quieres una versión pagada, Zenith hace la personalización básica para que funcione en tu operación y la aloja. La propuesta define el alcance." en="Dashboard, inventory and SaaS: use the open source code for free and host it yourself. For a paid version, Zenith provides basic customization so it works for your operation and hosts it. The proposal defines the scope." /></p>
+      <div class="exgrid">
+        {s.products.map((p) => (
+          <div class="exw rv"><div class="ex prod">
+            <div class="art"><Illustration type={p.art} /></div>
+            <div class="meta"><div><h3><L es={p.es.name} en={p.en.name} /></h3><p><L es={p.es.tag} en={p.en.tag} /></p></div></div>
+            <div class="prod-foot">
+              <strong><L es={p.es.startingPrice} en={p.en.startingPrice} /></strong>
+              <div class="prod-links">
+                {p.demo && <a class="pbtn" href={p.demo}><Fragment set:html={play} /><L es="Ver la demo" en="View the demo" /></a>}
+                {p.oss && <a class="poss" href={p.oss} rel="noopener"><L es="Código abierto" en="Open source" /></a>}
+              </div>
+            </div>
+          </div></div>
+        ))}
       </div>
-    ) : (
-      <p class="note oss-note rv"><L es="Las páginas web no tienen sistema open source: se construyen a la medida del cliente y se mantienen como sistema de pago." en="Websites have no open source system: they are custom-built to the client and kept as a paid system." /></p>
+      <p class="note"><L es="Ejemplos ilustrativos." en="Illustrative examples." /></p>
+    </div></section>
+  )}
+
+  <section class="principles" id="precio"><div class="wrap">
+      <h2 class="lm"><span><L es="Precio del proyecto." en="Project pricing." /></span></h2>
+    <div class="pgrid">
+      {s.prices.map((p) => (
+        <div class="pr price-card rv"><h3><L es={p.label.es} en={p.label.en} /></h3><strong><L es={p.amount.es} en={p.amount.en} /></strong>{p.note && <p><L es={p.note.es} en={p.note.en} /></p>}</div>
+      ))}
+      <div class="pr rv"><h3><L es="Plazo" en="Timeline" /></h3><p><L es="El plazo depende del tamaño del proyecto, pero siempre recibirás avances durante el desarrollo." en="The timeline depends on the size of the project, but you always receive progress updates during development." /></p></div>
+      {!s.es.supportItems && <div class="pr rv"><h3><L es="Soporte" en="Support" /></h3><p><L es={s.es.support} en={s.en.support} /></p></div>}
+    </div>
+    {s.oss.length === 0 && (
+      <p class="note oss-note rv"><L es="Esta especialidad no tiene sistema open source: se construye a la medida del cliente y se mantiene como sistema de pago." en="This specialty has no open source system: it is custom-built for the client and kept as a paid system." /></p>
     )}
   </div></section>
+
+  {s.es.supportItems && (
+    <section class="principles support-detail"><div class="wrap">
+      <h2 class="lm"><span><L es="Renovación anual." en="Annual renewal." /></span></h2>
+      <p class="lead rv"><L es="Cada renovación incluye estos servicios para mantener tu página web protegida y actualizada:" en="Each renewal includes these services to keep your website protected and up to date:" /></p>
+      <ul class="support-list">{s.es.supportItems.map((item, i) => <li><L es={item.es} en={s.en.supportItems?.[i]?.en ?? item.es} /></li>)}</ul>
+    </div></section>
+  )}
 
   <section class="others"><div class="wrap">
     <h2 class="lm"><span><L es="Otras especialidades." en="Other specialties." /></span></h2>

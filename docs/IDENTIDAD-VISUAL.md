@@ -1,6 +1,6 @@
 # Zenith · Estilo visual e identidad
 
-Guía de la landing de Zenith: un equipo de desarrollo full stack que construye software para que los clientes no tengan que tocar código, y que ofrece open source a quien sí sabe programar. Sirve como referencia para mantener la misma identidad en cualquier pieza nueva.
+Guía de la landing de Zenith: una agencia de desarrollo de software que resuelve problemas de negocio (tiempo perdido, tareas repetitivas, datos esparcidos) con páginas web, software a la medida, automatizaciones y microservicios; los clientes no tocan código y quien programa puede usar su open source. Sirve como referencia para mantener la misma identidad en cualquier pieza nueva.
 
 ## 1. Idea central
 
@@ -17,25 +17,27 @@ Principios:
 
 **Home**
 
-1. Menú translúcido con logo y cuatro enlaces (Qué hacemos, Principios, Preguntas, Contacto) y una línea fina que marca el avance del scroll.
-2. Hero a pantalla completa: logo girando, ZENITH y el lema "Software full stack, sin que tengas que tocar código."
+1. Menú translúcido con logo y enlaces (Soluciones, Lanzamiento, Principios, Proceso, Sobre Zenith, Contacto) y una línea fina que marca el avance del scroll.
+2. Hero a pantalla completa: logo girando, ZENITH y el lema "Agencia de desarrollo de software. Tu negocio, con menos trabajo manual."
 3. Frase de presentación que se ilumina palabra por palabra.
-4. **Lo que construimos:** cuatro tarjetas con un ejemplo ilustrativo animado cada una. Cada tarjeta es un enlace a la página de su especialidad.
+4. **Lo que resolvemos:** cuatro tarjetas (páginas web, software a la medida, automatizaciones, microservicios) con un ejemplo ilustrativo animado cada una. Cada tarjeta es un enlace a la página de su especialidad.
 5. **Para quien programa y para quien no:** tres principios (full stack, código abierto, sin tocar código).
 6. **Preguntas frecuentes:** cinco preguntas en acordeón.
-7. Cierre con "Hablemos de tu proyecto.", el botón Contáctanos (abre el correo `zenith@antonioaleman.dev`) y el correo visible debajo.
+7. Cierre con "Hablemos de tu proyecto.", el botón Contáctanos (abre el correo `info@getzenith.dev`) y el correo visible debajo.
 8. Pie con el logo, © 2026 Zenith y el enlace a Privacidad y aviso legal.
 
-**Páginas de especialidad** (páginas web, dashboards personales, sistemas de inventarios, SaaS)
+**Páginas de especialidad** (páginas web, software a la medida, automatizaciones, microservicios)
 
 1. Menú con botón **Inicio** (flecha a la izquierda) para volver al home, y el logo a la derecha, que también lleva al inicio.
-2. Hero con el logo girando, la etiqueta "Especialidad", el nombre de la especialidad y su lema.
+2. Hero con el logo girando, la etiqueta "Especialidad", el nombre de la especialidad, su lema y (cuando aplique) los botones de demo.
 3. Frase de presentación específica.
 4. La ilustración en grande, dentro de un panel redondeado.
-5. **Lo esencial:** tres puntos propios de esa especialidad.
-6. **Otras especialidades:** enlaces a las otras tres.
-7. Cierre "Hablemos de tu…" con el botón Contáctanos (abre el correo) y el correo visible.
-8. Pie con el logo, © 2026 Zenith y el enlace a Privacidad y aviso legal.
+5. **Lo esencial:** tres puntos de beneficio de esa especialidad.
+6. **Sus productos** (solo software a la medida): tres tarjetas (Dashboard, Inventario, SaaS) con ilustración animada, precio, botón de demo y link open source.
+7. **Precio y soporte:** tarjetas de precio por nivel, plazo, soporte y tarjetas de open source (cuando existan).
+8. **Otras especialidades:** enlaces a las otras tres.
+9. Cierre "Hablemos de tu…" con el botón Contáctanos (abre el correo) y el correo visible.
+10. Pie con el logo, © 2026 Zenith, GitHub, Instagram @get_zenith y el enlace a Privacidad y aviso legal.
 
 ## 3. Logo
 
@@ -104,6 +106,8 @@ Curva base de todo: `cubic-bezier(.16, 1, .3, 1)` (sale rápido y frena con suav
 | Ilustración: dashboards | Se dibuja la línea del gráfico, se llena el anillo y crecen las barras; después un destello de luz recorre el panel en bucle. |
 | Ilustración: inventarios | Se llenan las barras de nivel, una fila de nivel bajo parpadea y un barrido de luz recorre la lista. |
 | Ilustración: SaaS | Aparecen usuarios, un interruptor se enciende y se apaga, y las barras en escalera laten suavemente en bucle. |
+| Ilustración: automatizaciones | Los nodos del pipeline aparecen uno a uno, un punto de luz viaja por el camino, la última casilla marca la palomita y las filas de registro se llenan; destello de luz en bucle. |
+| Ilustración: microservicios | Las barras del cliente y el círculo del servicio aparecen, peticiones y respuestas circulan entre ambos y el servicio late suavemente; destello de luz en bucle. |
 | Ilustración grande | En las especialidades se endereza y crece al entrar en pantalla. |
 | Tarjetas de ejemplos | Se inclinan siguiendo el cursor, muestran un brillo y la flecha gira al pasar encima. |
 | Otras especialidades | Se elevan al pasar el cursor y la flecha avanza. |
@@ -124,9 +128,9 @@ Con `prefers-reduced-motion` todo aparece directamente en su estado final, sin a
 ## 9. Voz y contenido
 
 - Directa y tranquila: frases cortas, verbos simples, sin exagerar.
-- Habla de lo que Zenith es y hace; no promete resultados.
-- Todo lo escrito sale de lo definido: equipo full stack; los clientes no tocan código; open source para quien programa; ejemplos de trabajo (páginas web, dashboards personales, sistemas de inventarios, SaaS); precios aún sin definir.
-- Los textos de cada especialidad son descripciones generales. No incluyen cifras, tiempos ni funciones concretas.
+- Vende la solución, no la característica: habla de problemas resueltos (ahorrar tiempo, ganar más, facilitar tareas) sin prometer cifras ni resultados inventados.
+- Todo lo escrito sale de lo definido: agencia de desarrollo de software; cuatro áreas (páginas web, software a la medida con dashboard/inventario/SaaS open source, automatizaciones y microservicios); los clientes no tocan código.
+- Los textos de cada especialidad son descripciones generales. No incluyen cifras ni funciones concretas más allá de los precios de lista publicados.
 
 ## 10. Accesibilidad
 
@@ -141,9 +145,9 @@ Con `prefers-reduced-motion` todo aparece directamente en su estado final, sin a
 
 Hecho:
 
-- Botón Contáctanos con destino real: `mailto:zenith@antonioaleman.dev` en el home y en cada especialidad; el correo también se muestra visible en el cierre.
-- Favicon en el `<head>`, meta description, Open Graph, `theme-color`, URL canónica y `og:url` con el dominio `https://zenith.antonioaleman.dev`.
-- Cada especialidad es una página real e indexable: `/paginas-web`, `/dashboards`, `/inventarios`, `/saas`, con título y descripción propios; incluidas en `sitemap-index.xml` y `robots.txt`.
+- Botón Contáctanos con destino real: `mailto:info@getzenith.dev` en el home y en cada especialidad; el correo también se muestra visible en el cierre.
+- Favicon en el `<head>`, meta description, Open Graph, `theme-color`, URL canónica y `og:url` con el dominio `https://getzenith.dev`.
+- Cada especialidad es una página real e indexable: `/paginas-web`, `/software-a-la-medida`, `/automatizaciones`, `/microservicios`, con título y descripción propios; incluidas en `sitemap-index.xml` y `robots.txt`. Las rutas antiguas (`/dashboards`, `/inventarios`, `/saas`) redirigen a `/software-a-la-medida`.
 - La navegación entre el home y las especialidades conserva el círculo morado con el logo (velo) entre páginas reales.
 - Página de privacidad y aviso legal enlazada desde el pie (`/privacidad`).
 - Página 404.

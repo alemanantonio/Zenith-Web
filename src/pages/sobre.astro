@@ -1,15 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
+import Veil from '../components/Veil.astro';
 import Footer from '../components/Footer.astro';
+import Cta from '../components/Cta.astro';
 import HelpChat from '../components/HelpChat.astro';
 import L from '../components/L.astro';
+import { specialties, EMAIL, GITHUB, INSTAGRAM } from '../data/specialties';
 
-const title = { es: 'Sobre Zenith · Desarrollo con propósito', en: 'About Zenith · Purposeful development' };
+const title = { es: 'Sobre Zenith · Agencia de desarrollo de software', en: 'About Zenith · Software development agency' };
 const description = {
-  es: 'Conoce la historia, filosofía y forma de trabajo de Zenith, detrás de Antonio Alemán.',
-  en: 'Learn about Zenith, its philosophy and how Antonio Alemán works with clients and open source.',
+  es: 'Conoce la historia, filosofía y forma de trabajo de Zenith, la agencia de desarrollo de software detrás de Antonio Alemán.',
+  en: 'Learn about Zenith, the software development agency behind Antonio Alemán: its philosophy, how it works and how to reach it.',
 };
+const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+const statementEs = 'Zenith existe para que tu negocio gane tiempo y claridad: software útil, hecho a tu medida, con open source para quien programa.';
+const statementEn = 'Zenith exists so your business gains time and clarity: useful software, built for you, with open source for those who code.';
 const principles = [
   { n: '01', es: 'Resolver problemas reales', en: 'Solve real problems', dEs: 'Cada proyecto responde a una necesidad concreta. Las funciones se deciden por su utilidad, no por añadir características solo porque la tecnología lo permite.', dEn: 'Every project answers a concrete need. Features are chosen for their usefulness, not added only because technology allows them.' },
   { n: '02', es: 'Simplicidad antes que complejidad', en: 'Simplicity before complexity', dEs: 'Elegir la solución más sencilla que cumpla los requisitos, sin sacrificar seguridad, calidad ni capacidad de evolución.', dEn: 'Choose the simplest solution that meets the requirements without sacrificing security, quality or room to evolve.' },
@@ -21,22 +27,40 @@ const principles = [
 ---
 <Base title={title} description={description}>
   <Nav variant="sub" />
+  <Veil />
   <header class="hero sub about-hero">
     <div class="orb o1"></div><div class="orb o2"></div><div class="ring"></div><div class="glow"></div>
     <div class="stage">
       <svg class="smark" aria-hidden="true" viewBox="0 0 1000 1000"><image href="/favicon.svg" width="100%" height="100%"/></svg>
       <p class="kicker"><L es="Sobre Zenith" en="About Zenith" /></p>
       <h1 class="word sub"><span class="words"><L es="Código con propósito." en="Code with purpose." /></span></h1>
-      <p class="tag"><L es="Una forma de hacer convivir el software privado y el open source sin ponerlos en competencia." en="A way to let private software and open source coexist without putting them in competition." /></p>
+      <p class="tag"><L es="Una agencia de desarrollo de software que resuelve lo que te frena, sin que toques código." en="A software development agency that removes what holds you back, without you touching code." /></p>
     </div>
   </header>
 
+  <section class="statement">
+    <p>
+      <span class="l es" lang="es" set:html={words(statementEs)} />
+      <span class="l en" lang="en" set:html={words(statementEn)} />
+    </p>
+  </section>
+
   <section class="about-intro"><div class="wrap">
-    <p class="about-lead"><L es="Zenith existe detrás de Antonio Alemán para construir software útil y mantener una relación sana entre el código privado y el código abierto." en="Zenith exists behind Antonio Alemán to build useful software and create a healthy relationship between private and open source code." /></p>
+    <p class="about-lead"><L es="Somos una agencia de desarrollo de software detrás de Antonio Alemán. Construimos software útil para negocios y mantenemos una relación sana entre el código privado y el código abierto." en="We are a software development agency behind Antonio Alemán. We build useful software for businesses and keep a healthy relationship between private and open source code." /></p>
     <div class="about-grid">
-      <div class="pr rv"><h2><L es="Quién está detrás" en="Who is behind it" /></h2><p><L es="Antonio Alemán desarrolla Zenith y mantiene sus proyectos open source en GitHub." en="Antonio Alemán develops Zenith and maintains its open source projects on GitHub." /></p><a class="about-link" href="https://github.com/alemanantonio" target="_blank" rel="noreferrer">github.com/alemanantonio →</a></div>
-      <div class="pr rv"><h2><L es="Para quién es" en="Who it is for" /></h2><p><L es="Buscamos cualquier tipo de cliente: desde programadores senior hasta personas con un negocio y sin experiencia en desarrollo web." en="We work with every kind of client: from senior programmers to people with a business and no web development experience." /></p></div>
-      <div class="pr rv"><h2><L es="Cómo nos comunicamos" en="How we communicate" /></h2><p><L es="Trabajamos en UTC−6, Ciudad de México. Una vez aprobado el proyecto, nos comunicamos por WhatsApp durante el desarrollo." en="We work in UTC−6, Mexico City. Once a project is approved, we communicate through WhatsApp during development." /></p></div>
+      <div class="pr rv"><h2><L es="Quién está detrás" en="Who is behind it" /></h2><p><L es="Antonio Alemán desarrolla Zenith y mantiene sus proyectos open source en GitHub." en="Antonio Alemán develops Zenith and maintains its open source projects on GitHub." /></p><a class="about-link" href={GITHUB} target="_blank" rel="noreferrer">github.com/alemanantonio →</a></div>
+      <div class="pr rv"><h2><L es="Para quién es" en="Who it is for" /></h2><p><L es="Trabajamos con cualquier tipo de cliente: desde programadores senior hasta personas con un negocio y sin experiencia en desarrollo web." en="We work with every kind of client: from senior programmers to people with a business and no web development experience." /></p></div>
+      <div class="pr rv"><h2><L es="Cómo nos comunicamos" en="How we communicate" /></h2><p><L es="Trabajamos en UTC−6, Ciudad de México. Una vez aprobado el proyecto, nos comunicamos por WhatsApp durante el desarrollo." en="We work in UTC−6, Mexico City. Once a project is approved, we communicate through WhatsApp during development." /></p><a class="about-link" href={INSTAGRAM} target="_blank" rel="noreferrer">instagram.com/get_zenith →</a></div>
+      <div class="pr rv"><h2><L es="Contacto" en="Contact" /></h2><p><L es="Escríbenos y cuéntanos qué te frena; te respondemos en horario de oficina." en="Write to us and tell us what holds you back; we reply during office hours." /></p><a class="about-link" href={`mailto:${EMAIL}`}>{EMAIL} →</a></div>
+    </div>
+  </div></section>
+
+  <section class="principles about-work"><div class="wrap">
+    <h2 class="lm"><span><L es="Qué resolvemos." en="What we solve." /></span></h2>
+    <div class="mgrid">
+      {specialties.map((s) => (
+        <a class="mini rv" href={`/${s.slug}`}><span><L es={s.es.name} en={s.en.name} /></span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      ))}
     </div>
   </div></section>
 
@@ -44,6 +68,8 @@ const principles = [
     <h2 class="lm"><span><L es="Nuestra filosofía." en="Our philosophy." /></span></h2>
     <div class="pgrid">{principles.map((p) => <div class="pr rv"><span class="num">{p.n}</span><h3><L es={p.es} en={p.en} /></h3><p><L es={p.dEs} en={p.dEn} /></p></div>)}</div>
   </div></section>
+
+  <Cta heading={{ es: 'Hablemos de tu proyecto.', en: "Let's talk about your project." }} />
 
   <Footer />
   <HelpChat />

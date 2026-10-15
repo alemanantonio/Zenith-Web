@@ -1,6 +1,6 @@
 # Zenith Web
 
-Sitio de presentacion de Zenith, un equipo de desarrollo full stack que construye software (paginas web, dashboards, sistemas de inventarios y SaaS) para que el cliente no tenga que tocar codigo. Ofrece open source para quien si programa.
+Sitio de presentacion de Zenith, una agencia de desarrollo de software que resuelve problemas de negocio (paginas web, software a la medida: dashboards, inventarios y SaaS, automatizaciones CI/CD, n8n y Power Automate, y microservicios/APIs). Ofrece open source para quien si programa.
 
 ## Requisitos
 
@@ -37,8 +37,8 @@ docs/
   MIGRACION-ASTRO.md       notas del proyecto y trabajo pendiente
 ```
 
-Cada especialidad es una pagina real: `/paginas-web`, `/dashboards`, `/inventarios`, `/saas`. La navegacion entre paginas usa el velo morado con el logo. El sitio apunta a `https://zenith.antonioaleman.dev` y genera sitemap con `@astrojs/sitemap`.
+Cada especialidad es una pagina real: `/paginas-web`, `/software-a-la-medida`, `/automatizaciones`, `/microservicios`. Las rutas viejas (`/dashboards`, `/inventarios`, `/saas`) redirigen a `/software-a-la-medida`. La navegacion entre paginas usa el velo morado con el logo. El sitio apunta a `https://getzenith.dev` y genera sitemap con `@astrojs/sitemap`.
 
 ## Contacto
 
-Correos y consultas: zenith@antonioaleman.dev
+Correos y consultas: info@getzenith.dev

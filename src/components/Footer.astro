@@ -1,5 +1,5 @@
 ---
-import { GITHUB, GITHUB_USER, SITE_OWNER } from '../data/specialties';
+import { GITHUB, GITHUB_USER, INSTAGRAM, INSTAGRAM_USER, SITE_OWNER } from '../data/specialties';
 import L from './L.astro';
 ---
 <footer>
@@ -8,6 +8,8 @@ import L from './L.astro';
   <L es="Atención 7:00–17:00 (CDMX)" en="Available 7:00 AM–5:00 PM (Mexico City)" />
   <span class="fsep" aria-hidden="true">·</span>
   <a href={GITHUB} rel="noopener">GitHub @{GITHUB_USER}</a>
+  <span class="fsep" aria-hidden="true">·</span>
+  <a href={INSTAGRAM} rel="noopener">Instagram @{INSTAGRAM_USER}</a>
   <span class="fsep" aria-hidden="true">·</span>
   <a href={SITE_OWNER} rel="noopener">antonioaleman.dev</a>
   <span class="fsep" aria-hidden="true">·</span>

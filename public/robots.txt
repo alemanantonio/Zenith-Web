@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zenith.antonioaleman.dev/sitemap-index.xml
+Sitemap: https://getzenith.dev/sitemap-index.xml

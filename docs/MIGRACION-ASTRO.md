@@ -10,7 +10,7 @@ Notas sobre cómo está construido el sitio de Zenith hoy. Nació como un archiv
 - **Componentes compartidos.** `Base.astro` (head, estilos, script), `Nav`, `Footer`, `Veil`, `Cta` e `Illustration` se reutilizan en todas las páginas.
 - **Páginas aparte.** `404.astro` (noindex) y `privacidad.astro` (aviso legal y política de privacidad) conservan estilos propios mínimos.
 - **Tipografía propia.** Jost se sirve desde el propio sitio con `@fontsource-variable/jost`; no hay peticiones a Google Fonts.
-- **SEO.** `site` apunta a `https://zenith.antonioaleman.dev`; hay sitemap (`@astrojs/sitemap`), `robots.txt`, canónicas y Open Graph por página.
+- **SEO.** `site` apunta a `https://getzenith.dev`; hay sitemap (`@astrojs/sitemap`), `robots.txt`, canónicas y Open Graph por página.
 
 ## 2. Comandos
 
@@ -40,7 +40,7 @@ docs/MIGRACION-ASTRO.md       este archivo
 
 ## 4. SEO
 
-- `site` en `astro.config.mjs` apunta a `https://zenith.antonioaleman.dev`.
+- `site` en `astro.config.mjs` apunta a `https://getzenith.dev`.
 - Cada página tiene title, description, canónica y `og:url` propios.
 - `@astrojs/sitemap` genera `sitemap-index.xml`; `public/robots.txt` lo referencia.
 - `og:image` apunta a `/og.png` (1200×630), generada desde el logo con `npm run og` (`scripts/generate-og.mjs`).
