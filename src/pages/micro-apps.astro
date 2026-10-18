@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Veil from '../components/Veil.astro';
+import Footer from '../components/Footer.astro';
+import HelpChat from '../components/HelpChat.astro';
+import L from '../components/L.astro';
+import { EMAIL } from '../data/specialties';
+
+const title = { es: 'Micro apps · Próximamente · Zenith', en: 'Micro apps · Coming soon · Zenith' };
+const description = {
+  es: 'Próximamente: micro apps de Zenith con pago mensual para ahorrar tiempo en tareas diarias y dedicar más horas a tus clientes y ventas.',
+  en: 'Coming soon: Zenith monthly subscription micro apps to save time on daily tasks and spend more hours on customers and sales.',
+};
+---
+<Base title={title} description={description}>
+  <Nav variant="sub" />
+  <Veil />
+  <header class="hero sub microapps-hero">
+    <div class="orb o1"></div><div class="orb o2"></div>
+    <div class="stage">
+      <h1 class="word sub"><span class="words"><span>Micro apps</span></span></h1>
+      <p class="microapps-status"><L es="Próximamente" en="Coming soon" /></p>
+      <p class="tag"><L es="Menos tareas. Más tiempo para hacer crecer tus ingresos." en="Fewer tasks. More time to grow your revenue." /></p>
+      <a class="hero-action" href="#microapps-catalogo"><L es="Conoce lo que viene →" en="Discover what is coming →" /></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="offerings"><div class="wrap">
+      <h2><L es="Más tiempo para tu negocio." en="More time for your business." /></h2>
+      <p class="lead"><L es="Estamos preparando herramientas para necesidades generales, con funciones definidas y un pago mensual más económico que un desarrollo exclusivo. Su objetivo: reducir trabajo manual y dejarte más tiempo para atender clientes, vender y generar ingresos." en="We are preparing tools for common needs, with predefined features and a monthly payment more affordable than bespoke development. Their purpose: reduce manual work and give you more time to serve customers, sell and generate revenue." /></p>
+      <div class="pgrid">
+        <div class="pr"><h3><L es="Ahorra tiempo" en="Save time" /></h3><p><L es="Resuelve tareas concretas con una herramienta lista para usar, sin encargar un proyecto desde cero." en="Handle specific tasks with a ready-to-use tool, without commissioning a project from scratch." /></p></div>
+        <div class="pr"><h3><L es="Dedica más horas a vender" en="Spend more hours selling" /></h3><p><L es="Menos trabajo administrativo deja más espacio para dar seguimiento a tus clientes y aprovechar oportunidades de venta." en="Less administrative work leaves more room to follow up with customers and pursue sales opportunities." /></p></div>
+        <div class="pr"><h3><L es="Pago mensual" en="Monthly subscription" /></h3><p><L es="Cuando estén disponibles, podrás suscribirte y acceder de inmediato. Cada app tendrá sus funciones y precio publicados." en="Once available, you will be able to subscribe and get immediate access. Each app will have its features and price published." /></p></div>
+      </div>
+    </div></section>
+
+    <section class="microapps-catalog" id="microapps-catalogo"><div class="wrap">
+      <h2><L es="Nuestras micro apps" en="Our micro apps" /></h2>
+      <div class="microapps-coming">
+        <p class="microapps-coming-title"><L es="Próximamente" en="Coming soon" /></p>
+        <p><L es="Estamos preparando las primeras micro apps de Zenith. Aquí encontrarás sus funciones, precios mensuales y enlaces de acceso cuando estén disponibles." en="We are preparing Zenith’s first micro apps. You will find their features, monthly prices and access links here once available." /></p>
+        <a class="offering-link" href={`mailto:${EMAIL}?subject=Me%20interesan%20las%20micro%20apps`}><L es="Preguntar por las micro apps →" en="Ask about micro apps →" /></a>
+      </div>
+      <p class="microapps-custom"><L es="¿Tu empresa necesita funciones específicas? El software a medida se desarrolla según tus requisitos, después de analizar el proyecto." en="Does your business need specific features? Custom software is developed around your requirements after analyzing the project." /> <a class="offering-link" href="/software-a-la-medida"><L es="Ver software a medida →" en="Explore custom software →" /></a></p>
+    </div></section>
+  </main>
+  <Footer />
+  <HelpChat />
+</Base>

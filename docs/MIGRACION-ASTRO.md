@@ -4,7 +4,7 @@ Notas sobre cómo está construido el sitio de Zenith hoy. Nació como un archiv
 
 ## 1. Cómo funciona
 
-- **Astro estático.** `npm run build` genera `dist/` con archivos que se pueden servir en cualquier hosting de archivos. No hay servidor ni framework de UI.
+- **Astro estático.** `pnpm run build` genera `dist/` con archivos que se pueden servir en cualquier hosting de archivos. No hay servidor ni framework de UI.
 - **Una página por especialidad.** El home (`index.astro`) y cada especialidad (`[slug].astro` → `/paginas-web`, `/dashboards`, `/inventarios`, `/saas`) son páginas Astro reales, con título, descripción y URL canónica propios. Los textos y datos viven en `src/data/specialties.ts`.
 - **Navegación fluida.** Al navegar entre páginas, un velo morado con el logo se expande desde el punto del clic, cubre la carga y se desvanece en la página nueva (mismo efecto de antes, ahora entre documentos). Se desactiva con `prefers-reduced-motion`.
 - **Componentes compartidos.** `Base.astro` (head, estilos, script), `Nav`, `Footer`, `Veil`, `Cta` e `Illustration` se reutilizan en todas las páginas.
@@ -15,10 +15,10 @@ Notas sobre cómo está construido el sitio de Zenith hoy. Nació como un archiv
 ## 2. Comandos
 
 ```bash
-npm run dev       # servidor de desarrollo
-npm run build     # genera dist/
-npm run preview   # sirve dist/
-npm run check     # revisión de tipos Astro
+pnpm run dev       # servidor de desarrollo
+pnpm run build     # genera dist/
+pnpm run preview   # sirve dist/
+pnpm run check     # revisión de tipos Astro
 ```
 
 ## 3. Archivos
@@ -43,8 +43,8 @@ docs/MIGRACION-ASTRO.md       este archivo
 - `site` en `astro.config.mjs` apunta a `https://getzenith.dev`.
 - Cada página tiene title, description, canónica y `og:url` propios.
 - `@astrojs/sitemap` genera `sitemap-index.xml`; `public/robots.txt` lo referencia.
-- `og:image` apunta a `/og.png` (1200×630), generada desde el logo con `npm run og` (`scripts/generate-og.mjs`).
+- `og:image` apunta a `/og.png` (1200×630), generada desde el logo con `pnpm run og` (`scripts/generate-og.mjs`).
 
 ## 5. Publicación
 
-`npm run build` crea `dist/` y `sitemap-index.xml`. El dominio ya está definido en `astro.config.mjs`. Si se publica en una subcarpeta (por ejemplo GitHub Pages), también hace falta `base`.
+`pnpm run build` crea `dist/` y `sitemap-index.xml`. El dominio ya está definido en `astro.config.mjs`. Si se publica en una subcarpeta (por ejemplo un alojamiento estático), también hace falta `base`.

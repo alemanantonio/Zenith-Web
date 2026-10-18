@@ -1,0 +1,37 @@
+---
+import L from './L.astro';
+---
+<section class="website-examples" id="ejemplos"><div class="wrap">
+  <h2><L es="Cómo podría quedar tu página web" en="What your website could look like" /></h2>
+  <p class="lead"><L es="Explora ejemplos de lo que podemos crear para presentar tu negocio." en="Explore examples of what we can create to present your business." /></p>
+  <article class="website-example">
+    <div class="website-example-copy">
+      <h3><L es="Un coche en 3D, una web en movimiento." en="A car in 3D, a website in motion." /></h3>
+      <p><L es="Un modelo 3D de un coche protagoniza la página. Al hacer scroll, las animaciones acompañan el recorrido y convierten la presentación en una experiencia interactiva." en="A 3D car model takes center stage. As you scroll, animations guide the journey and turn the presentation into an interactive experience." /></p>
+      <p><L es="Una referencia para explorar una presentación de producto con animación y profundidad." en="A reference for exploring a product presentation with animation and depth." /></p>
+      <a class="offering-link" href="https://3d.getzenith.dev" target="_blank" rel="noopener noreferrer"><L es="Explorar ejemplo 3D ↗" en="Explore the 3D example ↗" /></a>
+    </div>
+    <div class="website-preview" data-website-preview>
+      <div class="website-preview-intro">
+        <span class="website-preview-name">3D.getzenith.dev</span>
+        <p><L es="Descubre el recorrido con scroll." en="Discover the scroll experience." /></p>
+        <button type="button" data-load-preview><L es="Cargar vista previa" en="Load preview" /></button>
+        <p class="website-preview-note"><L es="Puedes abrir el ejemplo en otra pestaña para recorrerlo a pantalla completa." en="Open the example in another tab to explore it in full screen." /></p>
+      </div>
+    </div>
+  </article>
+</div></section>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-load-preview]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const container = button.closest('[data-website-preview]');
+      if (!container) return;
+      const frame = document.createElement('iframe');
+      frame.src = 'https://3d.getzenith.dev';
+      frame.title = document.documentElement.lang === 'en' ? '3D car website example' : 'Ejemplo de página web con coche en 3D';
+      frame.referrerPolicy = 'no-referrer';
+      frame.allow = 'fullscreen';
+      container.replaceChildren(frame);
+    }, { once: true });
+  });
+</script>

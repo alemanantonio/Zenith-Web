@@ -1,6 +1,6 @@
 # Zenith · Estilo visual e identidad
 
-Guía de la landing de Zenith: una agencia de desarrollo de software que resuelve problemas de negocio (tiempo perdido, tareas repetitivas, datos esparcidos) con páginas web, software a la medida, automatizaciones y microservicios; los clientes no tocan código y quien programa puede usar su open source. Sirve como referencia para mantener la misma identidad en cualquier pieza nueva.
+Guía de la landing de Zenith: una agencia de desarrollo de software que resuelve problemas de negocio (tiempo perdido, tareas repetitivas, datos esparcidos) con páginas web, software a la medida, automatizaciones y microservicios; ofrece además micro apps generales de pago mensual con acceso inmediato. Sirve como referencia para mantener la misma identidad en cualquier pieza nueva.
 
 ## 1. Idea central
 
@@ -17,11 +17,11 @@ Principios:
 
 **Home**
 
-1. Menú translúcido con logo y enlaces (Soluciones, Lanzamiento, Principios, Proceso, Sobre Zenith, Contacto) y una línea fina que marca el avance del scroll.
-2. Hero a pantalla completa: logo girando, ZENITH y el lema "Agencia de desarrollo de software. Tu negocio, con menos trabajo manual."
+1. Menú translúcido con logo y enlaces (Soluciones, Lanzamiento, Micro apps, Proceso, Sobre Zenith, Contacto) y una línea fina que marca el avance del scroll.
+2. Hero a pantalla completa: logo girando, ZENITH y el lema "Agencia de desarrollo de software. Sistemas a medida y micro apps de pago mensual."
 3. Frase de presentación que se ilumina palabra por palabra.
 4. **Lo que resolvemos:** cuatro tarjetas (páginas web, software a la medida, automatizaciones, microservicios) con un ejemplo ilustrativo animado cada una. Cada tarjeta es un enlace a la página de su especialidad.
-5. **Para quien programa y para quien no:** tres principios (full stack, código abierto, sin tocar código).
+5. **Dos formas de empezar:** software especializado con análisis y desarrollo según requisitos, frente a micro apps generales más económicas con pago mensual y acceso inmediato.
 6. **Preguntas frecuentes:** cinco preguntas en acordeón.
 7. Cierre con "Hablemos de tu proyecto.", el botón Contáctanos (abre el correo `info@getzenith.dev`) y el correo visible debajo.
 8. Pie con el logo, © 2026 Zenith y el enlace a Privacidad y aviso legal.
@@ -33,11 +33,11 @@ Principios:
 3. Frase de presentación específica.
 4. La ilustración en grande, dentro de un panel redondeado.
 5. **Lo esencial:** tres puntos de beneficio de esa especialidad.
-6. **Sus productos** (solo software a la medida): tres tarjetas (Dashboard, Inventario, SaaS) con ilustración animada, precio, botón de demo y link open source.
-7. **Precio y soporte:** tarjetas de precio por nivel, plazo, soporte y tarjetas de open source (cuando existan).
+6. **Sus productos** (solo software a la medida): tres tarjetas (Dashboard, Inventario, SaaS) con ilustración animada, precio y botón de demo. Son ejemplos de proyectos a medida, no herramientas con acceso inmediato.
+7. **Precio y soporte:** tarjetas de precio por nivel, plazo, soporte según el alcance del proyecto.
 8. **Otras especialidades:** enlaces a las otras tres.
 9. Cierre "Hablemos de tu…" con el botón Contáctanos (abre el correo) y el correo visible.
-10. Pie con el logo, © 2026 Zenith, GitHub, Instagram @get_zenith y el enlace a Privacidad y aviso legal.
+10. Pie con el logo, © 2026 Zenith, Instagram @get_zenith y el enlace a Privacidad y aviso legal.
 
 ## 3. Logo
 
@@ -129,7 +129,7 @@ Con `prefers-reduced-motion` todo aparece directamente en su estado final, sin a
 
 - Directa y tranquila: frases cortas, verbos simples, sin exagerar.
 - Vende la solución, no la característica: habla de problemas resueltos (ahorrar tiempo, ganar más, facilitar tareas) sin prometer cifras ni resultados inventados.
-- Todo lo escrito sale de lo definido: agencia de desarrollo de software; cuatro áreas (páginas web, software a la medida con dashboard/inventario/SaaS open source, automatizaciones y microservicios); los clientes no tocan código.
+- Todo lo escrito sale de lo definido: agencia de desarrollo de software; cuatro áreas (páginas web, software a la medida con dashboard/inventario/SaaS especializado, automatizaciones y microservicios); los clientes no tocan código.
 - Los textos de cada especialidad son descripciones generales. No incluyen cifras ni funciones concretas más allá de los precios de lista publicados.
 
 ## 10. Accesibilidad
@@ -152,10 +152,18 @@ Hecho:
 - Página de privacidad y aviso legal enlazada desde el pie (`/privacidad`).
 - Página 404.
 - Tipografía alojada en el propio sitio con `@fontsource-variable/jost` (sin peticiones a Google Fonts).
-- Imagen de Open Graph (`/og.png`, 1200×630): logo hueso sobre el degradado de marca, generada con `npm run og`.
+- Imagen de Open Graph (`/og.png`, 1200×630): logo hueso sobre el degradado de marca, generada con `pnpm run og`.
 
 Pendiente:
 
 - Revisar y validar los textos de cada especialidad.
 - Precios, cuando se definan.
 - Decisión de navegación en móvil (hoy los enlaces del menú se ocultan sin hamburguesa).
+
+## Oferta comercial
+
+El software especializado se construye según los requisitos de cada empresa: primero análisis, después desarrollo y entrega. No ofrece acceso inmediato. Las micro apps tienen funciones generales ya definidas, pago mensual, menor costo y acceso inmediato al suscribirse. No publicar nombres, precios ni enlaces de suscripción hasta que estén definidos. La oferta de páginas web se conserva y muestra ejemplos en su propia sección, comenzando por 3D.getzenith.dev (coche 3D con animaciones al hacer scroll).
+
+## Beneficios y micro apps
+
+Comunicar el ahorro de tiempo y las oportunidades de aumentar ingresos mediante beneficios concretos: menos tareas manuales, mejor atención al cliente, seguimiento comercial e información centralizada. No inventar cifras de ahorro ni resultados garantizados. La ruta `/micro-apps` muestra «Próximamente»; aclarar en home, ayuda y Sobre Zenith que el acceso inmediato por suscripción estará disponible después del lanzamiento.

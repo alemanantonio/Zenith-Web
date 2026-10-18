@@ -1,6 +1,4 @@
 export const EMAIL = 'info@getzenith.dev';
-export const GITHUB = 'https://github.com/alemanantonio';
-export const GITHUB_USER = 'alemanantonio';
 export const SITE_OWNER = 'https://antonioaleman.dev';
 export const INSTAGRAM = 'https://instagram.com/get_zenith';
 export const INSTAGRAM_USER = 'get_zenith';
@@ -14,7 +12,6 @@ export interface ProductText {
 
 export interface Product {
   art: 'dash' | 'inv' | 'saas';
-  oss: string | null;
   demo: string | null;
   es: ProductText;
   en: ProductText;
@@ -40,7 +37,6 @@ export interface SpecialtyText {
 export interface Specialty {
   slug: string;
   art: 'web' | 'saas' | 'auto' | 'api';
-  oss: string[];
   demos: { href: string; es: string; en: string }[];
   prices: PriceTier[];
   products?: Product[];
@@ -52,7 +48,6 @@ export const specialties: Specialty[] = [
   {
     slug: 'paginas-web',
     art: 'web',
-    oss: [],
     demos: [],
     prices: [
       {
@@ -66,10 +61,10 @@ export const specialties: Specialty[] = [
     ],
     es: {
       name: 'Páginas web',
-      tag: 'Un sitio claro que convierte visitas en clientes.',
-      stmt: 'Tu negocio en línea, presentado con claridad: que te encuentren, te entiendan y te escriban.',
+      tag: 'Ahorra tiempo al presentar tu negocio y convierte visitas en oportunidades de venta.',
+      stmt: 'Tu web explica lo que vendes, responde dudas y atrae clientes: menos consultas repetidas, más oportunidades de venta.',
       cta: 'Hablemos de tu página web.',
-      description: 'Páginas web a la medida de tu negocio, presentadas con claridad para que te encuentren y te escriban. Tú no tocas código.',
+      description: 'Páginas web para ahorrar tiempo respondiendo dudas, atraer clientes y generar oportunidades de venta. Diseño a la medida de tu negocio.',
       support: 'Renovación anual. Incluye:',
       supportItems: [
         { es: 'Hosting, dominio y correos', en: 'Hosting, domain and email' },
@@ -82,16 +77,16 @@ export const specialties: Specialty[] = [
       ],
       pr: [
         { t: 'Te encuentran', d: 'Un sitio claro hace que tu negocio aparezca cuando te buscan.' },
-        { t: 'Generas confianza', d: 'Una presencia profesional que da seguridad desde el primer vistazo.' },
-        { t: 'Sin tocar código', d: 'Tú no tienes que escribir ni modificar código: nuestro equipo se encarga.' },
+        { t: 'Más oportunidades de venta', d: 'Presenta tus servicios con claridad y facilita que los visitantes te contacten para comprar.' },
+        { t: 'Menos consultas repetidas', d: 'Tu web explica servicios, horarios y formas de contacto para que dediques más tiempo a atender clientes.' },
       ],
     },
     en: {
       name: 'Websites',
-      tag: 'A clear site that turns visitors into customers.',
-      stmt: 'Your business online, presented with clarity: so people find you, understand you and reach out.',
+      tag: 'Save time presenting your business and turn visits into sales opportunities.',
+      stmt: 'Your website explains your offer, answers questions and attracts customers: fewer repetitive inquiries, more sales opportunities.',
       cta: "Let's talk about your website.",
-      description: 'Custom websites for your business, presented with clarity so people find you and reach out. You do not touch code.',
+      description: 'Custom websites to save time answering questions, attract customers and generate sales opportunities.',
       support: 'Annual renewal. Includes:',
       supportItems: [
         { es: 'Hosting, dominio y correos', en: 'Hosting, domain and email' },
@@ -104,19 +99,14 @@ export const specialties: Specialty[] = [
       ],
       pr: [
         { t: 'People find you', d: 'A clear site makes your business show up when people search for it.' },
-        { t: 'You build trust', d: 'A professional presence that inspires confidence at first sight.' },
-        { t: 'No code required', d: 'You do not have to write or modify code: our team handles it.' },
+        { t: 'More sales opportunities', d: 'Present your services clearly and make it easy for visitors to contact you to buy.' },
+        { t: 'Fewer repetitive inquiries', d: 'Your website explains services, opening hours and contact options so you spend more time serving customers.' },
       ],
     },
   },
   {
     slug: 'software-a-la-medida',
     art: 'saas',
-    oss: [
-      'https://github.com/alemanantonio/Zenith-Dashboard',
-      'https://github.com/alemanantonio/Zenith-Inventario',
-      'https://github.com/alemanantonio/Zenith-SaaS',
-    ],
     demos: [
       { href: '/demo/dashboards', es: 'Demo dashboard', en: 'Dashboard demo' },
       { href: '/demo/inventarios', es: 'Demo inventario', en: 'Inventory demo' },
@@ -139,7 +129,6 @@ export const specialties: Specialty[] = [
     products: [
       {
         art: 'dash',
-        oss: 'https://github.com/alemanantonio/Zenith-Dashboard',
         demo: '/demo/dashboards',
         es: {
           name: 'Dashboard',
@@ -156,7 +145,6 @@ export const specialties: Specialty[] = [
       },
       {
         art: 'inv',
-        oss: 'https://github.com/alemanantonio/Zenith-Inventario',
         demo: '/demo/inventarios',
         es: {
           name: 'Inventario',
@@ -173,7 +161,6 @@ export const specialties: Specialty[] = [
       },
       {
         art: 'saas',
-        oss: 'https://github.com/alemanantonio/Zenith-SaaS',
         demo: '/demo/saas',
         es: {
           name: 'SaaS',
@@ -190,36 +177,35 @@ export const specialties: Specialty[] = [
       },
     ],
     es: {
-      name: 'Software A La Medida',
-      tag: 'Dashboards, inventarios y plataformas SaaS: un solo software para operar sin hojas de cálculo.',
-      stmt: 'Tu operación centralizada: menos trabajo repetitivo y decisiones tomadas con los datos a la vista.',
+      name: 'Software a la medida',
+      tag: 'Software según tus requisitos para ahorrar tiempo de operación y hacer crecer tus ingresos.',
+      stmt: 'Menos horas operando a mano. Más tiempo para atender clientes, vender y hacer crecer tu empresa.',
       cta: 'Hablemos de tu software a la medida.',
-      description: 'Dashboards, sistemas de inventarios y plataformas SaaS a la medida de tu operación: tres productos para centralizar tu trabajo sin tocar código.',
+      description: 'Software especializado para empresas: SaaS, dashboards, inventarios y otros sistemas según los requisitos del cliente. Para ahorrar tiempo y mejorar tus oportunidades de ingreso. Requiere análisis y desarrollo antes de la entrega.',
       support: 'Renovación anual con alojamiento premium, siempre alojado por nuestra parte.',
       pr: [
         { t: 'Menos trabajo repetitivo', d: 'Tu operación centralizada en un solo software, sin hojas de cálculo.' },
-        { t: 'Decisiones con datos', d: 'Tus números a la vista para decidir con información, no con intuición.' },
-        { t: 'Código abierto', d: 'Dashboard, inventario y SaaS son open source: puedes instalarlos y revisarlos.' },
+        { t: 'Más oportunidades de ingreso', d: 'Con tus datos a la vista, identifica qué se vende, detecta pérdidas y dedica recursos a lo que hace crecer tu negocio.' },
+        { t: 'Análisis antes de desarrollar', d: 'Definimos contigo los requisitos, el alcance y los tiempos. El acceso llega después del desarrollo y la entrega; no es inmediato.' },
       ],
     },
     en: {
       name: 'Custom Software',
-      tag: 'Dashboards, inventory systems and SaaS platforms: one piece of software to run without spreadsheets.',
-      stmt: 'Your operation in one place: less busywork and decisions made with the data in view.',
+      tag: 'Software built to your requirements to save operational time and grow revenue.',
+      stmt: 'Fewer hours on manual operations. More time to serve customers, sell and grow your business.',
       cta: "Let's talk about your custom software.",
-      description: 'Custom dashboards, inventory systems and SaaS platforms for your operation: three products to centralize your work without touching code.',
+      description: 'Specialized business software: SaaS, dashboards, inventory and other systems built to client requirements. Designed to save time and improve revenue opportunities. Analysis and development come before delivery.',
       support: 'Annual renewal with premium hosting, always hosted by us.',
       pr: [
         { t: 'Less busywork', d: 'Your operation centralized in one system, no spreadsheets.' },
-        { t: 'Decisions backed by data', d: 'Your numbers in view so you decide with information, not guesswork.' },
-        { t: 'Open source', d: 'Dashboard, inventory and SaaS are open source: you can install and review them.' },
+        { t: 'More revenue opportunities', d: 'With your data in view, identify what sells, spot losses and focus resources on what grows your business.' },
+        { t: 'Analysis before development', d: 'Together we define requirements, scope and timing. Access comes after development and delivery; it is not immediate.' },
       ],
     },
   },
   {
     slug: 'automatizaciones',
     art: 'auto',
-    oss: [],
     demos: [],
     prices: [
       {
@@ -229,35 +215,34 @@ export const specialties: Specialty[] = [
     ],
     es: {
       name: 'Automatizaciones',
-      tag: 'Trabajos repetitivos que la máquina hace por ti.',
-      stmt: 'Recupera horas cada semana: conectamos tus herramientas para que las tareas repetitivas se hagan solas.',
+      tag: 'Menos tareas repetitivas. Más tiempo para vender y atender clientes.',
+      stmt: 'Automatiza tareas, recupera horas y dedica ese tiempo a lo que genera ingresos en tu negocio.',
       cta: 'Hablemos de tu automatización.',
-      description: 'Automatizaciones con CI/CD, n8n y Power Automate: menos tiempo perdido y menos errores en tu operación.',
+      description: 'Automatizaciones con CI/CD, n8n y Power Automate: ahorra tiempo, reduce errores y libera horas para atender clientes y generar ingresos.',
       support: 'Renovación anual con mantenimiento y ajustes por nuestra parte.',
       pr: [
         { t: 'Ahorras tiempo', d: 'Las tareas repetitivas se ejecutan solas, todos los días.' },
         { t: 'Menos errores', d: 'Los procesos automáticos no olvidan pasos ni se equivocan a mano.' },
-        { t: 'Sin tocar código', d: 'Nosotros diseñamos y conectamos la automatización; tú solo la usas.' },
+        { t: 'Más tiempo para vender', d: 'Libera a tu equipo de tareas manuales para dar seguimiento a clientes y aprovechar oportunidades comerciales.' },
       ],
     },
     en: {
       name: 'Automations',
-      tag: 'Repetitive work the machine does for you.',
-      stmt: 'Get hours back every week: we connect your tools so repetitive tasks run on their own.',
+      tag: 'Fewer repetitive tasks. More time to sell and serve customers.',
+      stmt: 'Automate tasks, get hours back and spend that time on what generates revenue for your business.',
       cta: "Let's talk about your automation.",
-      description: 'Automations with CI/CD, n8n and Power Automate: less time lost and fewer errors in your operation.',
+      description: 'Automations with CI/CD, n8n and Power Automate: save time, reduce errors and free up hours to serve customers and generate revenue.',
       support: 'Annual renewal with maintenance and adjustments handled by us.',
       pr: [
         { t: 'You save time', d: 'Repetitive tasks run on their own, every day.' },
         { t: 'Fewer errors', d: 'Automated processes do not skip steps or make manual mistakes.' },
-        { t: 'No code required', d: 'We design and wire the automation; you just use it.' },
+        { t: 'More time to sell', d: 'Free your team from manual tasks to follow up with customers and pursue sales opportunities.' },
       ],
     },
   },
   {
     slug: 'microservicios',
     art: 'api',
-    oss: [],
     demos: [],
     prices: [
       {
@@ -271,27 +256,27 @@ export const specialties: Specialty[] = [
     ],
     es: {
       name: 'Microservicios',
-      tag: 'APIs que conectan tus sistemas y los hacen crecer.',
-      stmt: 'Tus sistemas hablando entre sí: integraciones estándar e infraestructura lista para crecer.',
+      tag: 'Conecta tus sistemas para ahorrar tiempo y procesar más oportunidades de negocio.',
+      stmt: 'Datos que fluyen entre tus sistemas: menos capturas manuales y más agilidad para atender pedidos y vender.',
       cta: 'Hablemos de tus microservicios.',
-      description: 'Microservicios e APIs a la medida: integraciones estándar e infraestructura completa (AWS, Azure, Docker) sin tocar código.',
+      description: 'Microservicios y APIs a la medida para ahorrar tiempo conectando sistemas, reducir capturas duplicadas y atender más oportunidades de venta.',
       support: 'Renovación anual con mantenimiento de la infraestructura por nuestra parte.',
       pr: [
         { t: 'Sistemas que se conectan', d: 'Tus herramientas se comunican entre sí sin trabajo manual.' },
-        { t: 'Listos para crecer', d: 'La infraestructura aguanta cuando tu operación crece.' },
+        { t: 'Más capacidad para vender', d: 'Conecta pedidos, existencias y otros datos según tu operación para responder más rápido a tus clientes.' },
         { t: 'Sin tocar código', d: 'Diseñamos e implementamos todo; tú usas el resultado.' },
       ],
     },
     en: {
       name: 'Microservices',
-      tag: 'APIs that connect your systems and let them grow.',
-      stmt: 'Your systems talking to each other: standard integrations and infrastructure ready to grow.',
+      tag: 'Connect your systems to save time and handle more business opportunities.',
+      stmt: 'Data flowing between your systems: less manual entry and faster order handling and sales.',
       cta: "Let's talk about your microservices.",
-      description: 'Custom microservices and APIs: standard integrations and full infrastructure (AWS, Azure, Docker) without touching code.',
+      description: 'Custom microservices and APIs to save time connecting systems, reduce duplicate data entry and handle more sales opportunities.',
       support: 'Annual renewal with infrastructure maintenance handled by us.',
       pr: [
         { t: 'Systems that connect', d: 'Your tools talk to each other with no manual work.' },
-        { t: 'Ready to grow', d: 'Infrastructure that holds up as your operation grows.' },
+        { t: 'More capacity to sell', d: 'Connect orders, stock and other data around your operations to respond to customers faster.' },
         { t: 'No code required', d: 'We design and build everything; you use the result.' },
       ],
     },

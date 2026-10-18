@@ -41,7 +41,7 @@ const imageUrl = new URL(image, Astro.site);
   name: 'Zenith',
   url: Astro.site,
   logo: new URL('/favicon.svg', Astro.site),
-  sameAs: ['https://github.com/alemanantonio', 'https://instagram.com/get_zenith'],
+  sameAs: ['https://instagram.com/get_zenith'],
 })} />
 {service && <script type="application/ld+json" set:html={JSON.stringify({
   '@context': 'https://schema.org',
@@ -188,7 +188,7 @@ $$('.lang [data-setlang]').forEach(function(b){b.addEventListener('click',functi
 })});
 $$('.lang [data-setlang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setlang===document.documentElement.getAttribute('data-lang')?'true':'false')});
 onScroll();
-if(reduce)return;
+if(reduce||!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
 $$('.hero').forEach(function(h){h.addEventListener('pointermove',function(e){var r=h.getBoundingClientRect();h.style.setProperty('--mx',(e.clientX-r.left)+'px');h.style.setProperty('--my',(e.clientY-r.top)+'px')})});
 $$('.ex').forEach(function(c){
   c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;

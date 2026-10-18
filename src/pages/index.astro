@@ -12,12 +12,12 @@ import { specialties } from '../data/specialties';
 
 const title = { es: 'Zenith · Agencia de desarrollo de software', en: 'Zenith · Software development agency' };
 const description = {
-  es: 'Zenith es una agencia de desarrollo de software: páginas web, software a la medida, automatizaciones y microservicios que te ahorran tiempo y facilitan tus tareas.',
-  en: 'Zenith is a software development agency: websites, custom software, automations and microservices that save you time and make your work easier.',
+  es: 'Zenith es una agencia de desarrollo de software: software a medida y páginas web para ahorrar tiempo y generar más ingresos. Micro apps de pago mensual, próximamente.',
+  en: 'Zenith is a software development agency: custom software and websites to save time and grow revenue. Monthly subscription micro apps, coming soon.',
 };
 const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
-const statementEs = 'Software que resuelve lo que te frena: ahorra tiempo, facilita tus tareas y te hace ganar más.';
-const statementEn = 'Software that removes what holds you back: saves you time, makes tasks easier and helps you earn more.';
+const statementEs = 'Menos tiempo en tareas. Más oportunidades de ganar dinero.';
+const statementEn = 'Less time on tasks. More opportunities to earn.';
 const steps = [
   { n: '01', t: { es: 'Contacto', en: 'Contact' }, d: { es: 'Escríbenos y cuéntanos qué necesitas; te atendemos de 7:00 a 17:00, hora de la Ciudad de México.', en: 'Write to us and tell us what you need; we are available from 7:00 AM to 5:00 PM, Mexico City time.' } },
   { n: '02', t: { es: 'Propuesta', en: 'Proposal' }, d: { es: 'Te enviamos una propuesta con alcance y precio; este depende del tamaño del proyecto.', en: 'We send you a proposal with scope and price; the price depends on the size of the project.' } },
@@ -53,7 +53,8 @@ const launchExcluded = [
       <div id="par"><div class="mark-wrap">
         <HeroMark /></div></div>
       <h1 class="word" aria-label="Zenith"><span class="words"><span style="--i:0">Z</span><span style="--i:1">E</span><span style="--i:2">N</span><span style="--i:3">I</span><span style="--i:4">T</span><span style="--i:5">H</span></span></h1>
-      <p class="tag"><L es="Agencia de desarrollo de software. Tu negocio, con menos trabajo manual." en="Software development agency. Your business, with less manual work." /></p>
+      <p class="tag"><L es="Agencia de desarrollo de software. Ahorra tiempo y haz crecer tus ingresos." en="Software development agency. Save time and grow your revenue." /></p>
+      <a class="hero-action" href="#modalidades"><L es="Encuentra tu solución →" en="Find your solution →" /></a>
     </div>
     <div class="cue"></div>
   </header>
@@ -65,9 +66,37 @@ const launchExcluded = [
     </p>
   </section>
 
+  <section class="offerings" id="modalidades"><div class="wrap">
+    <h2><L es="Dos formas de empezar." en="Two ways to get started." /></h2>
+    <p class="lead"><L es="Software especializado para reducir trabajo manual y dedicar más tiempo a vender. Próximamente, también micro apps con pago mensual." en="Specialized software to reduce manual work and spend more time selling. Monthly subscription micro apps are also coming soon." /></p>
+    <div class="offering-grid">
+      <article class="offering">
+        <h3><L es="Software a medida" en="Custom software" /></h3>
+        <p><L es="Para empresas que necesitan que el sistema se adapte a su forma de trabajar. Desarrollamos según tus requisitos para ahorrar horas de operación y ayudarte a aprovechar más oportunidades de negocio." en="For businesses that need a system adapted to how they work. We develop it around your requirements to save operational hours and help you make the most of business opportunities." /></p>
+        <dl>
+          <div><dt><L es="Alcance" en="Scope" /></dt><dd><L es="Funciones e integraciones definidas para tu empresa." en="Features and integrations defined for your business." /></dd></div>
+          <div><dt><L es="Precio" en="Pricing" /></dt><dd><L es="Cotización según los requisitos y el alcance." en="A quote based on requirements and scope." /></dd></div>
+          <div><dt><L es="Acceso" en="Access" /></dt><dd><L es="Después del análisis, desarrollo y entrega. No es inmediato." en="After analysis, development and delivery. Access is not immediate." /></dd></div>
+        </dl>
+        <a class="offering-link" href="/software-a-la-medida"><L es="Explorar software a medida →" en="Explore custom software →" /></a>
+      </article>
+      <article class="offering" id="microapps">
+        <h3><L es="Micro apps" en="Micro apps" /></h3>
+        <p class="coming-soon"><L es="Próximamente" en="Coming soon" /></p>
+        <p><L es="Estamos preparando herramientas para necesidades generales: menos tareas manuales y más tiempo para atender clientes y vender, con un pago mensual más económico que un desarrollo exclusivo." en="We are preparing tools for common needs: less manual work and more time to serve customers and sell, with a monthly payment more affordable than bespoke development." /></p>
+        <dl>
+          <div><dt><L es="Alcance" en="Scope" /></dt><dd><L es="Una herramienta general que eliges según sus funciones." en="A general-purpose tool you choose based on its features." /></dd></div>
+          <div><dt><L es="Precio" en="Pricing" /></dt><dd><L es="Suscripción mensual, más económica que un desarrollo a medida." en="A monthly subscription, more affordable than custom development." /></dd></div>
+          <div><dt><L es="Acceso" en="Access" /></dt><dd><L es="Próximamente. Cuando estén disponibles, tendrás acceso inmediato al suscribirte." en="Coming soon. Once available, you will have immediate access when you subscribe." /></dd></div>
+        </dl>
+        <a class="offering-link" href="/micro-apps"><L es="Explorar micro apps →" en="Explore micro apps →" /></a>
+      </article>
+    </div>
+  </div></section>
+
   <section class="services" id="soluciones"><div class="wrap">
-    <h2 class="lm"><span><L es="Lo que resolvemos." en="What we solve." /></span></h2>
-    <p class="lead rv"><L es="Somos una agencia de desarrollo de software. Resolvemos problemas reales: tiempo perdido, tareas repetitivas y datos esparcidos. Entra a cada área para ver cómo." en="We are a software development agency. We solve real problems: lost time, repetitive tasks and scattered data. Open each area to see how." /></p>
+    <h2 class="lm"><span><L es="Desarrollo para tu negocio." en="Development for your business." /></span></h2>
+    <p class="lead rv"><L es="Creamos software especializado según los requisitos de tu empresa: sistemas, automatizaciones e integraciones. Primero analizamos tu proyecto y después lo desarrollamos. También diseñamos tu página web." en="We build specialized software around your business requirements: systems, automations and integrations. First we analyze your project, then we develop it. We also design your website." /></p>
     <div class="exgrid">
       {specialties.map((s) => (
         <div class="exw rv"><a class="ex" href={`/${s.slug}`} aria-label={s.es.name}>
@@ -79,17 +108,9 @@ const launchExcluded = [
     <p class="note"><L es="Ejemplos ilustrativos." en="Illustrative examples." /></p>
   </div></section>
 
-  <section class="principles" id="principios"><div class="wrap">
-    <h2 class="lm"><span><L es="Para quien programa y para quien no." en="For those who code and those who don't." /></span></h2>
-    <div class="pgrid">
-      <div class="pr rv"><h3><L es="De principio a fin" en="End to end" /></h3><p><L es="Del diseño de la interfaz a la lógica y los datos que la sostienen." en="From interface design to the logic and data behind it." /></p></div>
-      <div class="pr rv"><h3><L es="Productos open source" en="Open source products" /></h3><p><L es="Puedes usar el código de nuestros productos y alojarlos por tu cuenta. Si programas, puedes adaptarlos." en="You can use our products' code and host them yourself. If you code, you can adapt them." /></p></div>
-      <div class="pr rv"><h3><L es="A tu medida, sin programar" en="Custom-built, no coding" /></h3><p><L es="¿Quieres una versión adaptada a tu negocio? Nosotros la personalizamos, alojamos y mantenemos." en="Want a version tailored to your business? We customize, host and maintain it." /></p></div>
-    </div>
-  </div></section>
-
   <section class="principles" id="proceso"><div class="wrap">
-    <h2 class="lm"><span><L es="Cómo trabajamos." en="How we work." /></span></h2>
+    <h2 class="lm"><span><L es="Así creamos tu software." en="How we build your software." /></span></h2>
+    <p class="lead"><L es="Este proceso corresponde a los proyectos a medida. Las micro apps llegarán próximamente y tendrán acceso inmediato mediante suscripción mensual." en="This process applies to custom projects. Micro apps are coming soon and will provide immediate access through a monthly subscription." /></p>
     <div class="pgrid proc">
       {steps.map((s) => (
         <div class="pr rv"><span class="num">{s.n}</span><h3><L es={s.t.es} en={s.t.en} /></h3><p><L es={s.d.es} en={s.d.en} /></p></div>

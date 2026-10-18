@@ -1,19 +1,25 @@
 # Zenith Web
 
-Sitio de presentacion de Zenith, una agencia de desarrollo de software que resuelve problemas de negocio (paginas web, software a la medida: dashboards, inventarios y SaaS, automatizaciones CI/CD, n8n y Power Automate, y microservicios/APIs). Ofrece open source para quien si programa.
+Sitio de presentación de Zenith, una agencia de desarrollo de software especializado para empresas según sus requisitos y micro apps generales, más económicas, con suscripción mensual y acceso inmediato. El software a medida requiere análisis y desarrollo antes de la entrega. También ofrece páginas web, automatizaciones e integraciones. La página de páginas web incluye ejemplos, comenzando por https://3d.getzenith.dev.
 
 ## Requisitos
 
 - Node.js en la version que pida Astro (ver https://docs.astro.build)
-- npm
+- pnpm 12.3.4
+
+## Instalación
+
+```bash
+pnpm install --frozen-lockfile
+```
 
 ## Comandos
 
 ```bash
-npm run dev       # servidor de desarrollo
-npm run build     # genera dist/ (sitio estatico)
-npm run preview   # sirve dist/ para revisarlo
-npm run check     # revision de tipos y sintaxis Astro
+pnpm run dev       # servidor de desarrollo
+pnpm run build     # genera dist/ (sitio estatico)
+pnpm run preview   # sirve dist/ para revisarlo
+pnpm run check     # revision de tipos y sintaxis Astro
 ```
 
 ## Estructura
@@ -42,3 +48,5 @@ Cada especialidad es una pagina real: `/paginas-web`, `/software-a-la-medida`, `
 ## Contacto
 
 Correos y consultas: info@getzenith.dev
+
+La oferta comunica ahorro de tiempo y oportunidades de ingreso según cada servicio. `/micro-apps` presenta la próxima oferta de herramientas de pago mensual con estado «Próximamente». No hay suscripciones activas ni productos o precios publicados todavía.
