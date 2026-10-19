@@ -11,27 +11,18 @@ import L from './L.astro';
       <p><L es="Una referencia para explorar una presentación de producto con animación y profundidad." en="A reference for exploring a product presentation with animation and depth." /></p>
       <a class="offering-link" href="https://3d.getzenith.dev" target="_blank" rel="noopener noreferrer"><L es="Explorar ejemplo 3D ↗" en="Explore the 3D example ↗" /></a>
     </div>
-    <div class="website-preview" data-website-preview>
-      <div class="website-preview-intro">
-        <span class="website-preview-name">3D.getzenith.dev</span>
-        <p><L es="Descubre el recorrido con scroll." en="Discover the scroll experience." /></p>
-        <button type="button" data-load-preview><L es="Cargar vista previa" en="Load preview" /></button>
-        <p class="website-preview-note"><L es="Puedes abrir el ejemplo en otra pestaña para recorrerlo a pantalla completa." en="Open the example in another tab to explore it in full screen." /></p>
-      </div>
+    <div class="website-preview">
+      <iframe src="https://3d.getzenith.dev" title="Ejemplo de página web con coche en 3D / 3D car website example" loading="eager" referrerpolicy="no-referrer" allow="fullscreen"></iframe>
+    </div>
+  </article>
+  <article class="website-example">
+    <div class="website-example-copy">
+      <h3><L es="Un producto innovador, un video en scroll" en="An innovative product, a video on scroll" /></h3>
+      <p><L es="Un video dividido en diversas imágenes creando la ilusión de video con el scroll" en="A video split into multiple images, creating the illusion of video as you scroll" /></p>
+      <a class="offering-link" href="https://scroll.getzenith.dev" target="_blank" rel="noopener noreferrer"><L es="Explorar ejemplo de video en scroll ↗" en="Explore the scroll video example ↗" /></a>
+    </div>
+    <div class="website-preview">
+      <iframe src="https://scroll.getzenith.dev" title="Ejemplo de página web con video en scroll / Scroll video website example" loading="eager" referrerpolicy="no-referrer" allow="fullscreen"></iframe>
     </div>
   </article>
 </div></section>
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-load-preview]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const container = button.closest('[data-website-preview]');
-      if (!container) return;
-      const frame = document.createElement('iframe');
-      frame.src = 'https://3d.getzenith.dev';
-      frame.title = document.documentElement.lang === 'en' ? '3D car website example' : 'Ejemplo de página web con coche en 3D';
-      frame.referrerPolicy = 'no-referrer';
-      frame.allow = 'fullscreen';
-      container.replaceChildren(frame);
-    }, { once: true });
-  });
-</script>

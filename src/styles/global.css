@@ -383,6 +383,7 @@ html[data-veil="1"] #veil svg{opacity:1}
 /* Formas de contratar y ejemplos de páginas web */
 .hero-action{display:inline-flex;align-items:center;min-height:48px;margin-top:28px;padding:12px 24px;background:#f8f4fa;color:#4d2f5e;border-radius:999px;font-size:17px;font-weight:400;transition:background .2s,color .2s}@media (hover:hover) and (pointer:fine){
 .hero-action:hover{background:#2e2237;color:#fff}}
+#top .hero-action{animation:btin 1s var(--ease) 2.8s both}
 .offerings,.website-examples{padding:clamp(80px,10vw,140px) 0}
 .offerings h2,.website-examples h2{margin:0;max-width:22ch;font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
 .offering-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
