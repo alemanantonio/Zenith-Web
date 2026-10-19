@@ -1,7 +1,8 @@
 export const EMAIL = 'info@getzenith.dev';
-export const SITE_OWNER = 'https://antonioaleman.dev';
+export const GITHUB = 'https://github.com/getzenithdev';
 export const INSTAGRAM = 'https://instagram.com/get_zenith';
 export const INSTAGRAM_USER = 'get_zenith';
+export const TIKTOK = 'https://www.tiktok.com/@get_zenith';
 
 export interface ProductText {
   name: string;

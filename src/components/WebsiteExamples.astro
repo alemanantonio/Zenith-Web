@@ -1,5 +1,6 @@
 ---
 import L from './L.astro';
+import WebsitePreview from './WebsitePreview.astro';
 ---
 <section class="website-examples" id="ejemplos"><div class="wrap">
   <h2><L es="Cómo podría quedar tu página web" en="What your website could look like" /></h2>
@@ -11,9 +12,7 @@ import L from './L.astro';
       <p><L es="Una referencia para explorar una presentación de producto con animación y profundidad." en="A reference for exploring a product presentation with animation and depth." /></p>
       <a class="offering-link" href="https://3d.getzenith.dev" target="_blank" rel="noopener noreferrer"><L es="Explorar ejemplo 3D ↗" en="Explore the 3D example ↗" /></a>
     </div>
-    <div class="website-preview">
-      <iframe src="https://3d.getzenith.dev" title="Ejemplo de página web con coche en 3D / 3D car website example" loading="eager" referrerpolicy="no-referrer" allow="fullscreen"></iframe>
-    </div>
+    <WebsitePreview url="https://3d.getzenith.dev" image="/previews/website-3d.webp" title="Ejemplo de página web con coche en 3D / 3D car website example" />
   </article>
   <article class="website-example">
     <div class="website-example-copy">
@@ -21,8 +20,6 @@ import L from './L.astro';
       <p><L es="Un video dividido en diversas imágenes creando la ilusión de video con el scroll" en="A video split into multiple images, creating the illusion of video as you scroll" /></p>
       <a class="offering-link" href="https://scroll.getzenith.dev" target="_blank" rel="noopener noreferrer"><L es="Explorar ejemplo de video en scroll ↗" en="Explore the scroll video example ↗" /></a>
     </div>
-    <div class="website-preview">
-      <iframe src="https://scroll.getzenith.dev" title="Ejemplo de página web con video en scroll / Scroll video website example" loading="eager" referrerpolicy="no-referrer" allow="fullscreen"></iframe>
-    </div>
+    <WebsitePreview url="https://scroll.getzenith.dev" image="/previews/website-scroll.webp" title="Ejemplo de página web con video en scroll / Scroll video website example" />
   </article>
 </div></section>

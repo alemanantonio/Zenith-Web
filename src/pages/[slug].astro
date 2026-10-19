@@ -10,6 +10,7 @@ import L from '../components/L.astro';
 import WebsiteExamples from '../components/WebsiteExamples.astro';
 import HeroMark from '../components/HeroMark.astro';
 import { specialties, type Specialty } from '../data/specialties';
+import { inquiryForms } from '../data/inquiryForms';
 
 export function getStaticPaths() {
   return specialties.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -118,7 +119,7 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
     </div>
   </div></section>
 
-  <Cta heading={{ es: s.es.cta, en: s.en.cta }} />
+  <Cta heading={{ es: s.es.cta, en: s.en.cta }} form={inquiryForms[s.slug]} />
 
   <Footer />
   <HelpChat />

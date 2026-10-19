@@ -1,0 +1,61 @@
+---
+import L from './L.astro';
+
+interface Props {
+  url: string;
+  image: string;
+  title: string;
+}
+const { url, image, title } = Astro.props;
+---
+<website-preview class="website-preview" data-url={url} data-title={title}>
+  <div class="preview-cover">
+    <img src={image} alt="" width="1100" height="619" loading="lazy" decoding="async" />
+    <button class="preview-start" type="button"><L es="Interactuar con la página" en="Interact with the website" /></button>
+  </div>
+  <button class="preview-close" type="button" hidden><L es="Cerrar preview" en="Close preview" /></button>
+</website-preview>
+
+<script>
+  class WebsitePreview extends HTMLElement {
+    connectedCallback() {
+      const start = this.querySelector<HTMLButtonElement>('.preview-start');
+      const close = this.querySelector<HTMLButtonElement>('.preview-close');
+      start?.addEventListener('click', () => {
+        document.querySelectorAll<WebsitePreview>('website-preview').forEach((preview) => preview.reset());
+        const iframe = document.createElement('iframe');
+        iframe.src = this.dataset.url!;
+        iframe.title = this.dataset.title!;
+        iframe.referrerPolicy = 'no-referrer';
+        iframe.allow = 'fullscreen';
+        this.append(iframe);
+        this.querySelector<HTMLElement>('.preview-cover')!.hidden = true;
+        close!.hidden = false;
+        iframe.focus();
+      });
+      close?.addEventListener('click', () => {
+        this.reset();
+        start?.focus();
+      });
+    }
+
+    reset() {
+      this.querySelector('iframe')?.remove();
+      this.querySelector<HTMLElement>('.preview-cover')!.hidden = false;
+      this.querySelector<HTMLButtonElement>('.preview-close')!.hidden = true;
+    }
+  }
+
+  if (!customElements.get('website-preview')) customElements.define('website-preview', WebsitePreview);
+</script>
+
+<style>
+  website-preview{display:block;position:relative}
+  .preview-cover{position:absolute;inset:0;display:grid;place-items:center;isolation:isolate}
+  .preview-cover[hidden],.preview-close[hidden]{display:none}
+  .preview-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(5px);transform:scale(1.04);z-index:-2}
+  .preview-cover::after{content:'';position:absolute;inset:0;background:rgba(21,14,27,.28);z-index:-1}
+  .preview-start{max-width:calc(100% - 32px);box-shadow:0 8px 30px #0004}
+  .website-preview .preview-close{position:absolute;z-index:2;top:12px;right:12px;font-size:13px;min-height:44px;padding:10px 16px;box-shadow:0 4px 20px #0003}
+  button:focus-visible{outline:3px solid white;outline-offset:4px}
+</style>

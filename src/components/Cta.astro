@@ -1,17 +1,38 @@
 ---
 import { EMAIL } from '../data/specialties';
 import L from './L.astro';
+import InquiryForm from './InquiryForm.astro';
+import type { InquiryForm as InquiryFormData } from '../data/inquiryForms';
 
 interface Props {
   heading: { es: string; en: string };
+  form?: InquiryFormData;
 }
-const { heading } = Astro.props;
+const { heading, form } = Astro.props;
 ---
-<section class="cta" id="contacto">
+<section class:list={['cta', { 'cta-with-form': !!form }]} id="contacto">
   <div class="orb o1" style="left:-20vmax;top:-20vmax"></div>
+  <div class="cta-layout">
+  <div class="cta-copy">
   <h2 class="lm"><span><L es={heading.es} en={heading.en} /></span></h2>
   <p class="rv"><L es="Cuéntanos qué te quita tiempo. Creamos software para que puedas atender más clientes y generar más ingresos." en="Tell us what takes up your time. We build software so you can serve more customers and grow your revenue." /></p>
-  <div class="mag rv"><a class="btn" href={`mailto:${EMAIL}`}><L es="Contáctanos" en="Contact us" /></a></div>
+  {!form && <div class="mag rv"><a class="btn" href={`mailto:${EMAIL}`}><L es="Contáctanos" en="Contact us" /></a></div>}
   <a class="mail rv" href={`mailto:${EMAIL}`}>{EMAIL}</a>
   <p class="hours rv"><L es="Atención de 7:00 a 17:00, hora de la Ciudad de México (CDMX)." en="Available from 7:00 AM to 5:00 PM, Mexico City time (CDMX)." /></p>
+  </div>
+  {form && <InquiryForm form={form} />}
+  </div>
 </section>
+
+<style>
+  .cta-layout,.cta-copy{display:contents}
+  .cta-with-form .cta-layout{position:relative;z-index:2;display:grid;gap:40px;max-width:1280px;margin-inline:auto;text-align:left}
+  .cta-with-form .cta-copy{display:block;min-width:0}
+  .cta-with-form h2{font-size:clamp(34px,4.5vw,64px);overflow-wrap:anywhere}
+  .cta-with-form p{margin-inline:0}
+  @media(min-width:1000px){
+    .cta-with-form .cta-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:clamp(40px,5vw,80px)}
+    .cta-with-form .cta-copy{grid-column:1;grid-row:1}
+    .cta-with-form .cta-layout :global(.inquiry-form){grid-column:2;grid-row:1}
+  }
+</style>
