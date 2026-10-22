@@ -1,5 +1,5 @@
 import sharp from 'sharp';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readdir } from 'node:fs/promises';
 
 const W = 1200;
 const H = 630;
@@ -26,3 +26,11 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 await mkdir('public', { recursive: true });
 await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile('public/og.png');
 console.log('public/og.png listo');
+
+// Social previews need raster images; keep SVG originals as editable sources.
+for (const file of await readdir('public')) {
+  if (!/^og-.*\.svg$/.test(file)) continue;
+  const output = `public/${file.replace(/\.svg$/, '.png')}`;
+  await sharp(`public/${file}`).resize(W, H).png({ compressionLevel: 9 }).toFile(output);
+  console.log(`${output} listo`);
+}

@@ -1,0 +1,72 @@
+---
+import L from './L.astro';
+import hermanosDeTijera from '../../public/logos/hermanosdetijera.svg?raw';
+
+// Add each new collaboration here; repetitions only fill the continuous loop.
+const businesses = [
+  { name: 'Hermanos de Tijera', url: 'https://hermanosdetijera.getzenith.dev/', logo: hermanosDeTijera, image: '/logos/hermanosdetijera.svg' },
+];
+const repetitions = Math.ceil(4 / businesses.length);
+---
+
+<section class="collaborators" id="nuestro-trabajo" aria-labelledby="collaborators-title">
+  <div class="wrap collaborators-heading">
+    <h2 id="collaborators-title"><L es="Negocios con los que colaboramos" en="Businesses we work with" /></h2>
+  </div>
+  <div class="marquee-viewport">
+    <div class="marquee-track" id="collaborators-track">
+      {[0, 1].map((group) => (
+        <div class="marquee-group" aria-hidden={group === 1 ? 'true' : undefined}>
+          {Array.from({ length: repetitions }, (_, repeat) => businesses.map((business) => (
+            <a class="business" href={business.url} target="_blank" rel="noopener noreferrer"
+              aria-label={business.name}
+              tabindex={group === 0 && repeat === 0 ? undefined : -1}
+              aria-hidden={repeat > 0 ? 'true' : undefined}>
+              <span class="business-logo" aria-hidden="true">
+                <span class="business-monochrome" set:html={business.logo} />
+                <img src={business.image} width="60" height="78" alt="" loading="lazy" />
+              </span>
+            </a>
+          )))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .collaborators{padding:48px 0 44px;background:var(--card)}
+  .collaborators-heading{margin-bottom:32px}
+  h2{margin:0;font-size:clamp(18px,2.4vw,24px);font-weight:300;letter-spacing:-.015em;line-height:1.25}
+  .marquee-viewport{overflow:hidden;padding:8px 0}
+  .marquee-track{display:flex;width:max-content;animation:collaborators-scroll 36s linear infinite}
+  .marquee-group{flex:0 0 auto;min-width:100vw;display:flex;align-items:center;justify-content:space-around;gap:72px;padding:0 36px}
+  .business{display:flex;align-items:center;justify-content:center;flex:none;min-width:80px;min-height:80px}
+  .business-logo{position:relative;display:block;width:60px;height:78px;flex:none}
+  .business-monochrome,.business-logo img{display:block;width:100%;height:100%}
+  .business-monochrome :global(svg){display:block;width:100%;height:100%}
+  .business-monochrome :global(circle[fill]){fill:var(--card)}
+  .business-monochrome :global(g[stroke]){stroke:var(--p3)}
+  .business-monochrome :global(path[fill]){fill:var(--p3)}
+  .business-logo img{position:absolute;inset:0;opacity:0;transition:opacity 180ms ease}
+  .business:focus-visible img,.business:active img{opacity:1}
+  .collaborators:has(.business:focus-visible) .marquee-track{animation-play-state:paused}
+  @media(hover:hover) and (pointer:fine){
+    .marquee-viewport:hover .marquee-track{animation-play-state:paused}
+    .business:hover img{opacity:1}
+  }
+  @keyframes collaborators-scroll{to{transform:translateX(-50%)}}
+  @media(max-width:600px){
+    .collaborators{padding:32px 0}
+    .collaborators-heading{margin-bottom:24px}
+    .marquee-group{gap:48px;padding:0 24px}
+    .business-logo{width:48px;height:62.4px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .marquee-track{animation:none;width:100%}
+    .marquee-group{flex-wrap:wrap;justify-content:center;gap:32px;min-width:0;width:100%}
+    .marquee-group[aria-hidden],.business[aria-hidden]{display:none}
+    .business-logo img{transition:none}
+  }
+</style>
+

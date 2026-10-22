@@ -1,0 +1,27 @@
+---
+import L from './L.astro';
+import type { Faq } from '../data/faqs';
+interface Props { items: Faq[] }
+const { items } = Astro.props;
+---
+<section class="faq" id="preguntas-frecuentes" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title"><L es="Preguntas frecuentes" en="Frequently asked questions" /></h2>
+    <div class="faq-list">
+      {items.map((item, i) => (
+        <article id={`question-${i + 1}`}>
+          <h3><L es={item.question.es} en={item.question.en} /></h3>
+          <p><L es={item.answer.es} en={item.answer.en} /></p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .faq{padding:0 0 clamp(100px,14vw,180px)}
+  h2{margin:0;font-size:clamp(32px,5vw,56px);font-weight:200;letter-spacing:-.02em;line-height:1.1}
+  .faq-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 64px;margin-top:48px}
+  h3{margin:0 0 12px;font-size:clamp(20px,2.4vw,26px);font-weight:300;line-height:1.25}
+  p{margin:0;max-width:60ch;color:var(--ink);font-size:17px;line-height:1.6}
+  @media(max-width:700px){.faq-list{grid-template-columns:1fr;gap:32px;margin-top:32px}}
+</style>

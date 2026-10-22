@@ -9,6 +9,8 @@ import HelpChat from '../components/HelpChat.astro';
 import L from '../components/L.astro';
 import WebsiteExamples from '../components/WebsiteExamples.astro';
 import HeroMark from '../components/HeroMark.astro';
+import Faq from '../components/Faq.astro';
+import { specialtyFaqs } from '../data/faqs';
 import { specialties, type Specialty } from '../data/specialties';
 import { inquiryForms } from '../data/inquiryForms';
 
@@ -22,12 +24,14 @@ const arrow = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m0 0
 const play = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.4l7 4.6-7 4.6z" fill="currentColor"/></svg>';
 const title = { es: `${s.es.name} · Zenith`, en: `${s.en.name} · Zenith` };
 const description = { es: s.es.description, en: s.en.description };
-const image = `/og-${s.slug}.svg`;
+const image = `/og-${s.slug}.png`;
+const faqs = specialtyFaqs(s);
 const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
 ---
-<Base title={title} description={description} image={image} service={{ es: s.es.name, en: s.en.name, description }}>
+<Base title={title} description={description} image={image} faqs={faqs} service={{ es: s.es.name, en: s.en.name, description }}>
   <Nav variant="sub" />
   <Veil />
+  <main>
 
   <header class="hero sub">
     <div class="orb o1"></div><div class="orb o2"></div>
@@ -119,7 +123,9 @@ const words = (t: string) => t.trim().split(/\s+/).map((w) => `<span class="w">$
     </div>
   </div></section>
 
+  <Faq items={faqs} />
   <Cta heading={{ es: s.es.cta, en: s.en.cta }} form={inquiryForms[s.slug]} />
+  </main>
 
   <Footer />
   <HelpChat />

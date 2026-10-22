@@ -393,6 +393,10 @@ html[data-veil="1"] #veil svg{opacity:1}
 .offering dl{margin:4px 0 28px;display:grid;gap:22px}
 .offering dt{font-size:16px;font-weight:500;margin-bottom:5px}
 .offering dd{margin:0;font-size:17px;line-height:1.5;color:var(--mute)}
+.microapps-note{margin-top:32px;max-width:60ch;scroll-margin-top:90px}
+.microapps-note h3{margin:0 0 8px;font-size:18px;font-weight:400;line-height:1.4}
+.microapps-note p{margin:0;color:var(--mute);font-size:17px;line-height:1.5}
+.microapps-note .offering-link{margin-top:4px}
 .offering-link{display:inline-flex;align-items:center;min-height:48px;font-size:17px;font-weight:400;color:var(--p3);text-decoration:underline;text-underline-offset:5px;margin-top:auto}@media (hover:hover) and (pointer:fine){
 .offering-link:hover{color:var(--ink)}}
 .website-example{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:44px}

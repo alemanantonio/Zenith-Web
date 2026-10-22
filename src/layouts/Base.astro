@@ -1,58 +1,27 @@
 ---
 import '@fontsource-variable/jost';
 import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import type { Faq } from '../data/faqs';
 
 interface Props {
   title: { es: string; en: string };
   description: { es: string; en: string };
   image?: string;
+  faqs?: Faq[];
   service?: { es: string; en: string; description: { es: string; en: string } };
 }
-const { title, description, image = '/og.png', service } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const imageUrl = new URL(image, Astro.site);
+const { title, description, image, service, faqs } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="es" data-lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-es={title.es} data-en={title.en}>{title.es}</title>
-<meta name="description" content={description.es} data-es={description.es} data-en={description.en}>
 <meta name="theme-color" content="#8b56a5">
 <meta name="color-scheme" content="light dark">
-<link rel="canonical" href={canonical}>
-<meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="Zenith">
-<meta property="og:title" content={title.es} data-es={title.es} data-en={title.en}>
-<meta property="og:description" content={description.es} data-es={description.es} data-en={description.en}>
-<meta property="og:url" content={canonical}>
-<meta property="og:image" content={imageUrl}>
-<meta property="og:image:alt" content={title.es}>
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content={imageUrl}>
+<Seo title={title} description={description} image={image} service={service} faqs={faqs} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<script type="application/ld+json" set:html={JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Zenith',
-  url: Astro.site,
-  logo: new URL('/favicon.svg', Astro.site),
-  sameAs: ['https://instagram.com/get_zenith'],
-})} />
-{service && <script type="application/ld+json" set:html={JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  provider: { '@type': 'Organization', name: 'Zenith', url: Astro.site },
-  name: service.es,
-  alternateName: service.en,
-  description: service.description.es,
-  areaServed: 'Worldwide',
-  image: imageUrl,
-})} />}
 <script is:inline>
 try{
   var l=localStorage.getItem('zenith-lang');
@@ -170,9 +139,9 @@ function applyLang(l){
   document.documentElement.setAttribute('data-lang',l);
   document.documentElement.setAttribute('lang',l);
   try{localStorage.setItem('zenith-lang',l)}catch(e){}
-  var el=$('title'),md=$('meta[name="description"]'),ot=$('meta[property="og:title"]'),od=$('meta[property="og:description"]');
+  var el=$('title');
   if(el&&(l==='en'?el.dataset.en:el.dataset.es))document.title=l==='en'?el.dataset.en:el.dataset.es;
-  [md,ot,od].forEach(function(m){
+  $$('meta[data-es][data-en]').forEach(function(m){
     if(!m)return;var v=l==='en'?m.dataset.en:m.dataset.es;if(v)m.setAttribute('content',v);
   });
   $$('.lang [data-setlang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setlang===l?'true':'false')});

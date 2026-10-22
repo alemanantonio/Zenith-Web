@@ -1,0 +1,88 @@
+---
+import { EMAIL, GITHUB, INSTAGRAM, TIKTOK } from '../data/specialties';
+import type { Faq, LocalizedText } from '../data/faqs';
+
+interface Props {
+  title: LocalizedText;
+  description: LocalizedText;
+  image?: string;
+  service?: { es: string; en: string; description: LocalizedText };
+  faqs?: Faq[];
+}
+const { title, description, image = '/og.png', service, faqs = [] } = Astro.props;
+const site = Astro.site!;
+// Match the directory URLs emitted by the static build and sitemap.
+const pathname = Astro.url.pathname.replace(/\/+$/, '') + '/';
+const canonical = new URL(pathname, site).href;
+const imageUrl = new URL(image, site).href;
+const organizationId = new URL('/#organization', site).href;
+const websiteId = new URL('/#website', site).href;
+const pageId = `${canonical}#webpage`;
+const pageType = pathname === '/sobre/' ? 'AboutPage' : faqs.length ? 'FAQPage' : 'WebPage';
+const graph: Record<string, unknown>[] = [
+  {
+    '@type': 'Organization', '@id': organizationId,
+    name: 'Zenith', url: site.href,
+    description: 'Agencia de desarrollo de software: páginas web, software a medida, automatizaciones y microservicios.',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', site).href },
+    email: EMAIL,
+    sameAs: [INSTAGRAM, GITHUB, TIKTOK],
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: ['es', 'en'] },
+  },
+  {
+    '@type': 'WebSite', '@id': websiteId, url: site.href, name: 'Zenith',
+    publisher: { '@id': organizationId }, inLanguage: 'es',
+  },
+  {
+    '@type': pageType, '@id': pageId, url: canonical,
+    name: title.es, description: description.es, inLanguage: 'es',
+    isPartOf: { '@id': websiteId }, publisher: { '@id': organizationId },
+    about: { '@id': service ? `${canonical}#service` : organizationId },
+    primaryImageOfPage: { '@type': 'ImageObject', url: imageUrl, width: 1200, height: 630 },
+    ...(pathname !== '/' ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } } : {}),
+    ...(faqs.length ? {
+      mainEntity: faqs.map((item, i) => ({
+        '@type': 'Question', '@id': `${canonical}#question-${i + 1}`,
+        name: item.question.es,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer.es },
+      })),
+    } : {}),
+  },
+];
+if (pathname !== '/') graph.push({
+  '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Zenith', item: site.href },
+    { '@type': 'ListItem', position: 2, name: service?.es ?? title.es.split(' · ')[0], item: canonical },
+  ],
+});
+if (service) graph.push({
+  '@type': 'Service', '@id': `${canonical}#service`, url: canonical,
+  name: service.es, alternateName: service.en, serviceType: service.es,
+  description: service.description.es, provider: { '@id': organizationId },
+  mainEntityOfPage: { '@id': pageId }, image: imageUrl,
+});
+// Escape '<' so content cannot terminate a JSON-LD script element.
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+---
+<title data-es={title.es} data-en={title.en}>{title.es}</title>
+<meta name="description" content={description.es} data-es={description.es} data-en={description.en}>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Zenith">
+<meta property="og:title" content={title.es} data-es={title.es} data-en={title.en}>
+<meta property="og:description" content={description.es} data-es={description.es} data-en={description.en}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={imageUrl}>
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content={title.es} data-es={title.es} data-en={title.en}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title.es} data-es={title.es} data-en={title.en}>
+<meta name="twitter:description" content={description.es} data-es={description.es} data-en={description.en}>
+<meta name="twitter:image" content={imageUrl}>
+<meta name="twitter:image:alt" content={title.es} data-es={title.es} data-en={title.en}>
+<script type="application/ld+json" set:html={jsonLd} />

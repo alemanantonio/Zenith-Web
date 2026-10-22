@@ -7,6 +7,9 @@ import HelpChat from '../components/HelpChat.astro';
 import Cta from '../components/Cta.astro';
 import Illustration from '../components/Illustration.astro';
 import HeroMark from '../components/HeroMark.astro';
+import CollaboratorsMarquee from '../components/CollaboratorsMarquee.astro';
+import Faq from '../components/Faq.astro';
+import { homeFaqs } from '../data/faqs';
 import L from '../components/L.astro';
 import { specialties } from '../data/specialties';
 
@@ -41,9 +44,10 @@ const launchExcluded = [
   { es: 'Mantenimiento después del primer año', en: 'Maintenance after the first year' },
 ];
 ---
-<Base title={title} description={description}>
+<Base title={title} description={description} faqs={homeFaqs}>
   <Nav variant="home" />
   <Veil />
+  <main>
 
   <header class="hero" id="top">
     <div class="orb o1"></div><div class="orb o2"></div>
@@ -59,6 +63,8 @@ const launchExcluded = [
     <div class="cue"></div>
   </header>
 
+  <CollaboratorsMarquee />
+
   <section class="statement" id="que-es">
     <p>
       <span class="l es" lang="es" set:html={words(statementEs)} />
@@ -67,31 +73,35 @@ const launchExcluded = [
   </section>
 
   <section class="offerings" id="modalidades"><div class="wrap">
-    <h2><L es="Dos formas de empezar." en="Two ways to get started." /></h2>
-    <p class="lead"><L es="Software especializado para reducir trabajo manual y dedicar más tiempo a vender. Próximamente, también micro apps con pago mensual." en="Specialized software to reduce manual work and spend more time selling. Monthly subscription micro apps are also coming soon." /></p>
+    <h2><L es="Cómo podemos ayudarte" en="How we can help" /></h2>
+    <p class="lead"><L es="Presenta tu negocio con una página web o resuelve tareas de tu operación con software a medida. Analizamos lo que necesitas y definimos el alcance contigo." en="Present your business with a website or handle operational tasks with custom software. We analyze your needs and define the scope with you." /></p>
     <div class="offering-grid">
+      <article class="offering">
+        <h3><L es="Página web para tu negocio" en="A website for your business" /></h3>
+        <p><L es="Para presentar tus servicios, responder las dudas de tus clientes y facilitar que te contacten. Diseñamos una página que explique lo que ofreces y se adapte a tu negocio." en="Present your services, answer your customers’ questions and make it easy to get in touch. We design a website that explains what you offer and fits your business." /></p>
+        <dl>
+          <div><dt><L es="Alcance" en="Scope" /></dt><dd><L es="Diseño y desarrollo según el contenido y las funciones que necesitas." en="Design and development based on the content and features you need." /></dd></div>
+          <div><dt><L es="Precio" en="Pricing" /></dt><dd><L es="Cotización según el tamaño y el alcance de tu página." en="A quote based on the size and scope of your website." /></dd></div>
+          <div><dt><L es="Entrega" en="Delivery" /></dt><dd><L es="Plazo acordado en la propuesta, con avances durante el desarrollo." en="A timeline agreed in the proposal, with progress updates during development." /></dd></div>
+        </dl>
+        <a class="offering-link" href="/paginas-web"><L es="Explorar páginas web →" en="Explore websites →" /></a>
+      </article>
       <article class="offering">
         <h3><L es="Software a medida" en="Custom software" /></h3>
         <p><L es="Para empresas que necesitan que el sistema se adapte a su forma de trabajar. Desarrollamos según tus requisitos para ahorrar horas de operación y ayudarte a aprovechar más oportunidades de negocio." en="For businesses that need a system adapted to how they work. We develop it around your requirements to save operational hours and help you make the most of business opportunities." /></p>
         <dl>
           <div><dt><L es="Alcance" en="Scope" /></dt><dd><L es="Funciones e integraciones definidas para tu empresa." en="Features and integrations defined for your business." /></dd></div>
           <div><dt><L es="Precio" en="Pricing" /></dt><dd><L es="Cotización según los requisitos y el alcance." en="A quote based on requirements and scope." /></dd></div>
-          <div><dt><L es="Acceso" en="Access" /></dt><dd><L es="Después del análisis, desarrollo y entrega. No es inmediato." en="After analysis, development and delivery. Access is not immediate." /></dd></div>
+          <div><dt><L es="Entrega" en="Delivery" /></dt><dd><L es="Después del análisis y desarrollo, con avances durante el proceso." en="After analysis and development, with progress updates throughout the process." /></dd></div>
         </dl>
         <a class="offering-link" href="/software-a-la-medida"><L es="Explorar software a medida →" en="Explore custom software →" /></a>
       </article>
-      <article class="offering" id="microapps">
-        <h3><L es="Micro apps" en="Micro apps" /></h3>
-        <p class="coming-soon"><L es="Próximamente" en="Coming soon" /></p>
-        <p><L es="Estamos preparando herramientas para necesidades generales: menos tareas manuales y más tiempo para atender clientes y vender, con un pago mensual más económico que un desarrollo exclusivo." en="We are preparing tools for common needs: less manual work and more time to serve customers and sell, with a monthly payment more affordable than bespoke development." /></p>
-        <dl>
-          <div><dt><L es="Alcance" en="Scope" /></dt><dd><L es="Una herramienta general que eliges según sus funciones." en="A general-purpose tool you choose based on its features." /></dd></div>
-          <div><dt><L es="Precio" en="Pricing" /></dt><dd><L es="Suscripción mensual, más económica que un desarrollo a medida." en="A monthly subscription, more affordable than custom development." /></dd></div>
-          <div><dt><L es="Acceso" en="Access" /></dt><dd><L es="Próximamente. Cuando estén disponibles, tendrás acceso inmediato al suscribirte." en="Coming soon. Once available, you will have immediate access when you subscribe." /></dd></div>
-        </dl>
-        <a class="offering-link" href="/micro-apps"><L es="Explorar micro apps →" en="Explore micro apps →" /></a>
-      </article>
     </div>
+    <aside class="microapps-note" id="microapps" aria-labelledby="microapps-note-title">
+      <h3 id="microapps-note-title"><L es="Micro apps · Próximamente" en="Micro apps · Coming soon" /></h3>
+      <p><L es="Estamos preparando herramientas con suscripción mensual." en="We are preparing tools with monthly subscriptions." /></p>
+      <a class="offering-link" href="/micro-apps"><L es="Conoce lo que viene →" en="Discover what is coming →" /></a>
+    </aside>
   </div></section>
 
   <section class="services" id="soluciones"><div class="wrap">
@@ -146,7 +156,9 @@ const launchExcluded = [
     </div>
   </div></section>
 
+  <Faq items={homeFaqs} />
   <Cta heading={{ es: 'Hablemos de tu proyecto.', en: "Let's talk about your project." }} />
+  </main>
 
   <Footer />
   <HelpChat />
